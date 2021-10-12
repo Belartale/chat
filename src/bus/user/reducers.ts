@@ -7,3 +7,4 @@ export const setUser: types.SetUserContract = (...args) => {
 
     return { ...action.payload };
 };
+

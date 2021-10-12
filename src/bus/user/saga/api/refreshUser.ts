@@ -22,4 +22,3 @@ export const refreshUser: (id: string) => Promise<types.RefreshUser> = async (id
 
     return response.json();
 };
-

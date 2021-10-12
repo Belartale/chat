@@ -10,10 +10,13 @@ export type UserState = User;
 export type RefreshUser = User;
 export type RegisterUser = User;
 
-export type UserForm = {
+export interface UserForm {
     username: User['username']
-};
+}
+
+export interface TextChatForm extends UserForm {
+    text: string | null
+}
 
 // Contracts
 export type SetUserContract = CaseReducer<UserState, PayloadAction<UserState>>
-
