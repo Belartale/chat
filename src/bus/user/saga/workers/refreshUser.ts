@@ -12,7 +12,7 @@ import { togglerCreatorAction } from '../../../client/togglers';
 // API
 import * as API from '../api';
 
-// Instruments
+// Utils
 import { makeRequest, userLocalStore } from '../../../../tools/utils';
 
 export function* refreshUser(action: RefreshUserActionAsync) {

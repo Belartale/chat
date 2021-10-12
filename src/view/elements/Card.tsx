@@ -11,11 +11,14 @@ interface PropTypes extends AriaAttributes {
 
 // Styles
 const Styled = styled.div<PropTypes>`
-    padding: 20px;
+    padding: 10px;
     border-radius: 5px;
     background-color: ${({ theme }) => theme.card.primary};
     height: ${({ height }) => height ?? 'auto'};
     width: ${({ width }) => width ?? 'auto'};
+    @media (max-width: 576px) {
+        width: 100vw;
+    }
 `;
 
 export const Card: FC<PropTypes> = ({ children, ...otherProps }) => {

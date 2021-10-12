@@ -12,7 +12,7 @@ import { ContainerCenter } from '../../container';
 
 const Register: FC = () => {
     return (
-        <ContainerCenter>
+        <ContainerCenter fullHeight>
             <FormRegister/>
         </ContainerCenter>
     );

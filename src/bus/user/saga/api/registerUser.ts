@@ -14,7 +14,7 @@ export const registerUser: (userName: types.UserForm) => Promise<types.RegisterU
         body: JSON.stringify(userName),
     });
 
-    if (response.status !== 200 && response.status !== 201) {
+    if (response.status !== 201) {
         throw new ControlledError({
             message:    'registerUser failed',
             statusCode: response.status,

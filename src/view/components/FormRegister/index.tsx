@@ -37,7 +37,9 @@ export const FormRegister: FC = () => {
                     value = { form.username ?? '' }
                     onChange = { (event: ChangeEvent<HTMLInputElement>) => void handleChange(event, false) }
                 />
-                <ContainerCenter style = {{ marginTop: '10px' }}>
+                <ContainerCenter
+                    fullHeight
+                    style = {{ marginTop: '10px' }}>
                     <Button
                         type = 'submit'
                         onClick = { onSumbitBtn }>INTRO HOLE

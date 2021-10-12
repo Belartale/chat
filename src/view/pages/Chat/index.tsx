@@ -12,6 +12,7 @@ const Chat: FC = () => {
 
     return (
         <ContainerCenter
+            fullHeight
             flexDirection = 'column'
             justifyContent = 'space-around'>
             <div>

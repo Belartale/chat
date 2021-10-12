@@ -2,11 +2,17 @@ export const defaultTheme = {
     name: 'defaultTheme',
 
     backgroundPage: {
-        primary: '#edeae1',
+        primary: '#f0efeb',
     },
 
     card: {
-        primary: 'white',
+        primary: '#ffffff',
+    },
+    message: {
+        messageBody:          '#395afe',
+        messageBodyIsOwner:   '#ff3739',
+        messageFont:          'white',
+        messageFontSecondary: '#ff3739',
     },
 
     // button: {
