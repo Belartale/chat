@@ -29,26 +29,16 @@ const InputStyled = styled.input<PropTypes>`
     ${ ({ direction }) => direction === 'column' ? { marginTop: '10px' } : { marginLeft: '10px' }}
 `;
 
-//todo error
-// const TextError = styled.p`
-//     color: #9E0016;
-// `;
-
 export const Input: FC<PropTypes> = ({ label, id, name, direction, ...otherProps }) => {
     return (
-        <>
-            <Container direction = { direction }>
-                {label ? <label htmlFor = { id || name }>{label}</label> : null}
-                <InputStyled
-                    direction = { direction }
-                    id = { id || name }
-                    name = { name }
-                    { ...otherProps }
-                />
-            </Container>
-            {/* <div>
-                {error ? <TextError>{error}</TextError> : null }
-            </div> */}
-        </>
+        <Container direction = { direction }>
+            {label ? <label htmlFor = { id || name }>{label}</label> : null}
+            <InputStyled
+                direction = { direction }
+                id = { id || name }
+                name = { name }
+                { ...otherProps }
+            />
+        </Container>
     );
 };
