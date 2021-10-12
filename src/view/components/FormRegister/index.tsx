@@ -1,50 +1,51 @@
 // Core
 import React, { ChangeEvent, FC } from 'react';
-import styled from 'styled-components';
-import { useForm } from '../../../tools/hooks';
+import { v4 } from 'uuid';
+
+// Bus
+import { useUser } from '../../../bus/user';
+
+// Container
 import { ContainerCenter } from '../../container';
 
 // Elements
 import { Button, Card, Input } from '../../elements';
 
+// Tools
+import { useForm } from '../../../tools/hooks';
+
 // Types
-interface PropTypes {
+import { UserForm } from '../../../bus/user/types';
 
-}
-
-// Styles
-const FormRegisterStyled = styled.div<PropTypes>`
-    
-`;
-//! erorr
-export const FormRegister: FC<PropTypes> = () => {
-    const [ form, handleChange, setInitialForm, resetForm ] = useForm(null);
+export const FormRegister: FC = () => {
+    const [ form, handleChange ] = useForm<UserForm>({ username: `RAT:${v4().slice(0, 5)}` });
+    const { registerUser } = useUser();
 
     const onSumbitBtn = () => {
-        //! initialState
+        registerUser(form);
     };
 
     return (
-        <FormRegisterStyled>
-            <Card>
-                <form onSubmit = { (event) => event.preventDefault() }>
-                    <Input
-                        // error = {  }
-                        direction = 'column'
-                        id =  'username'
-                        label =  'username'
-                        name =  'username'
-                        onChange = { (event: ChangeEvent<HTMLInputElement>) => void handleChange(event, false) }
-                    />
-                    <ContainerCenter style = {{ marginTop: '10px' }}>
-                        <Button
-                            type = 'submit'
-                            onClick = { onSumbitBtn }>INTRO HOLE
-                        </Button>
-                    </ContainerCenter>
-                </form>
-            </Card>
-        </FormRegisterStyled>
+        <Card>
+            <form onSubmit = { (event) => event.preventDefault() }>
+                <Input
+                    //! error = {  }
+                    direction = 'column'
+                    id =  'username'
+                    label =  'username'
+                    name =  'username'
+                    type = 'text'
+                    value = { form.username ?? '' }
+                    onChange = { (event: ChangeEvent<HTMLInputElement>) => void handleChange(event, false) }
+                />
+                <ContainerCenter style = {{ marginTop: '10px' }}>
+                    <Button
+                        type = 'submit'
+                        onClick = { onSumbitBtn }>INTRO HOLE
+                    </Button>
+                </ContainerCenter>
+            </form>
+        </Card>
     );
 };
 

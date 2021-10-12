@@ -1,11 +1,11 @@
 // Tools
-import { ControlledError } from '../../../../../tools/utils';
-import { API_URL } from '../../../../../init';
+import { ControlledError } from '../../../../tools/utils';
+import { API_URL } from '../../../../init';
 
 // Types
 import * as types from '../../types';
 
-export const RefreshUser: (id: string) => Promise<types.RefreshUser> = async (id: string) => {
+export const refreshUser: (id: string) => Promise<types.RefreshUser> = async (id: string) => {
     const response = await fetch(`${API_URL}/users/refresh/${id}`, {
         method:  'GET',
         headers: {

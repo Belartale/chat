@@ -10,6 +10,8 @@ const initialState = {
     isMessagesFetching: false,
     isTodosFetching:    false,
     isRefreshUser:      false,
+    isRegisterUser:     false,
+    isLoggedIn:         false,
 };
 
 // Types

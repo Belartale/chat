@@ -1,28 +1,26 @@
 // Core
-import React, { DetailedHTMLProps, FC } from 'react';
+import React, { DetailedHTMLProps, FC, Ref } from 'react';
 import styled from 'styled-components';
 
 // Types
-interface PropTypes extends StyledInputProps, DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>,
-HTMLInputElement> {
+interface PropTypes extends DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     label?: string;
-    error?: object;
-    id: string;
-    name: string;
+    direction?: string;
     color?: string;
+    ref?: Ref<HTMLInputElement>;
 }
 
-type StyledInputProps = {
+interface ContainerProps {
     direction?: string;
 }
 
 // Styles
-const Container = styled.div<StyledInputProps>`
+const Container = styled.div<ContainerProps>`
     display: flex;
     ${ ({ direction }) => direction === 'column' ? { flexDirection: 'column' } : { flexDirection: 'row' }}
 `;
 
-const InputStyled = styled.input<StyledInputProps>`
+const InputStyled = styled.input<PropTypes>`
     width: auto;
     background-color: transparent;
     border: none;
@@ -31,27 +29,26 @@ const InputStyled = styled.input<StyledInputProps>`
     ${ ({ direction }) => direction === 'column' ? { marginTop: '10px' } : { marginLeft: '10px' }}
 `;
 
-const TextError = styled.p`
-    color: #9E0016;
-`;
-//! error
-export const Input: FC<PropTypes> = ({ label, error, id, name, direction, color, onChange }) => {
+//todo error
+// const TextError = styled.p`
+//     color: #9E0016;
+// `;
+
+export const Input: FC<PropTypes> = ({ label, id, name, direction, ...otherProps }) => {
     return (
         <>
             <Container direction = { direction }>
                 {label ? <label htmlFor = { id || name }>{label}</label> : null}
                 <InputStyled
-                    className = { `${error ? 'red' : ''}` }
-                    color = { color }
                     direction = { direction }
                     id = { id || name }
-                    type = 'text'
-                    onChange = { onChange }
+                    name = { name }
+                    { ...otherProps }
                 />
             </Container>
-            <div>
+            {/* <div>
                 {error ? <TextError>{error}</TextError> : null }
-            </div>
+            </div> */}
         </>
     );
 };

@@ -17,7 +17,7 @@ type OptionsType<T> = {
         payload: T;
     };
     errorAction?: Function;
-    successSideEffect?: Function;
+    successSideEffect?: (result: T) => void;
     errorSideEffect?: Function;
     isControlledMode?: boolean
 };
@@ -43,12 +43,10 @@ export function* makeRequest<T>(options: OptionsType<T>) {
 
         if (succesAction) {
             yield put(succesAction(result));
-            // yield console.log('some text');
-            // yield console.log(result);
         }
 
         if (successSideEffect) {
-            yield successSideEffect();
+            yield successSideEffect(result);
         }
 
         return result;

@@ -3,12 +3,14 @@ import React, { FC } from 'react';
 
 // Components
 import { ErrorBoundary, FormRegister } from '../../components';
+
+// Container
 import { ContainerCenter } from '../../container';
 
 //! Styles
 // import { Container } from './styles';
 
-const Main: FC = () => {
+const Register: FC = () => {
     return (
         <ContainerCenter>
             <FormRegister/>
@@ -18,6 +20,6 @@ const Main: FC = () => {
 
 export default () => (
     <ErrorBoundary>
-        <Main />
+        <Register />
     </ErrorBoundary>
 );

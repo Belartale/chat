@@ -8,7 +8,8 @@ import { UserState } from './types';
 import * as reducers from './reducers';
 
 export const initialState: UserState = {
-    userId: null,
+    _id:      null,
+    username: null,
 };
 
 export const uesrSlice = createSlice({

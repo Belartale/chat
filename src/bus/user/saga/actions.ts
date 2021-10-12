@@ -6,3 +6,7 @@ export const RefreshUserActionAsync: types.RefreshUserContract = (payload) => ({
     payload,
 });
 
+export const RegisterUserActionAsync: types.RegisterUserContract = (payload) => ({
+    type: types.REGISTER_USER_ASYNC,
+    payload,
+});

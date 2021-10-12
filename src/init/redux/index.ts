@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 // Reducers
 import togglers from '../../bus/client/togglers';
 import errors from '../../bus/client/errors';
-import user from '../../bus/client/user/slice';
+import user from '../../bus/user/slice';
 import messages from '../../bus/messages/slice';
 
 // Middleware
