@@ -10,7 +10,6 @@ export const Private: FC = () => {
     const { pathname } = useLocation();
 
     useEffect(()=> {
-        //! /login|register/ ?????
         if (pathname.match(/login|register/)) {
             push('/chat');
         }

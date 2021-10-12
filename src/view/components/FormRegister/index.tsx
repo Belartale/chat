@@ -29,7 +29,6 @@ export const FormRegister: FC = () => {
         <Card>
             <form onSubmit = { (event) => event.preventDefault() }>
                 <Input
-                    //! error = {  }
                     direction = 'column'
                     id =  'username'
                     label =  'username'
