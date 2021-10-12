@@ -1,14 +1,25 @@
 // Core
 import { useState } from 'react';
 
-export const useValidation = () => {
-    const [ isValidation, setIsValidation ] = useState<boolean>(false);
-    if (isValidation || isValidation.le) {
-        
-    }
+export const useValidation = (param?: boolean) => {
+    const [ isValidation, setIsValidation ] = useState<boolean>(param ?? false);
+
+    console.log(isValidation);
+
+    const handleValidation = (input: string | null) => {
+        if (input !== null) {
+            if (input && (input.length > 0 && input.length < 10)) {
+                setIsValidation(true);
+            } else {
+                setIsValidation(false);
+            }
+        } else {
+            setIsValidation(false);
+        }
+    };
 
     return {
-        isValidation
-        makeValidation
-    }
+        isValidation,
+        handleValidation,
+    };
 };

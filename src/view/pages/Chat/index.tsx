@@ -17,7 +17,11 @@ const Chat: FC = () => {
             justifyContent = 'space-around'>
             <div>
                 <ShowUserName />
-                <Button onClick = { logoutUser }>Logout</Button>
+                <Button
+                    padding = '5px 10px'
+                    variant = 'submit secondary'
+                    onClick = { logoutUser }>Logout
+                </Button>
             </div>
             <ChatComponent/>
             <div>

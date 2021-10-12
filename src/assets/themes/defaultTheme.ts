@@ -1,6 +1,9 @@
 export const defaultTheme = {
-    name: 'defaultTheme',
-
+    name:   'defaultTheme',
+    button: {
+        primary:   '#395afe',
+        secondary: '#ff3739',
+    },
     backgroundPage: {
         primary: '#f0efeb',
     },

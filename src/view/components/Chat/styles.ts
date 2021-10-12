@@ -3,15 +3,15 @@ import styled from 'styled-components';
 
 // Types
 type MessageDetailsType = {
-    direction: boolean;
+    direction: string;
 }
 
 type MessageType = {
-    isOwner: boolean;
+    isOwner: string;
 }
 
 type MessageBodyType = {
-    isOwner: boolean;
+    isOwner: string;
 }
 
 export const ContainerStyled = styled.div`
@@ -34,7 +34,7 @@ export const WindowChat = styled.div`
 export const Message = styled.div<MessageType>`
     margin-bottom: 10px;
     display: flex;
-    justify-content: ${ ({ isOwner }) => isOwner ? 'flex-end' : 'flex-start' };
+    justify-content: ${ ({ isOwner }) => isOwner === 'true' ? 'flex-end' : 'flex-start' };
 `;
 
 export const MessageBody = styled.div<MessageBodyType>`
@@ -42,7 +42,7 @@ export const MessageBody = styled.div<MessageBodyType>`
     display: inline-block;
     padding: 10px;
     border-radius: 5px;
-    background-color: ${({ theme, isOwner }) => isOwner ? theme.message.messageBodyIsOwner : theme.message.messageBody};
+    background-color: ${({ theme, isOwner }) => isOwner === 'true' ? theme.message.messageBodyIsOwner : theme.message.messageBody};
 `;
 
 export const MessageUserName = styled.p`
@@ -58,7 +58,7 @@ export const MessageText = styled.p`
 
 export const MessageDetails = styled.div<MessageDetailsType>`
     display: flex;
-    ${({ direction }) => !direction ? { justifyContent: 'space-between' } : { justifyContent: 'flex-end' }}
+    ${({ direction }) => direction === 'false' ? { justifyContent: 'space-between' } : { justifyContent: 'flex-end' }}
 `;
 
 export const MessageChanged = styled.p`
@@ -71,5 +71,3 @@ export const MessageDate = styled.p`
     color: ${({ theme }) => theme.message.messageFont};
 `;
 
-export const Form = styled.form`
-`;

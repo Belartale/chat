@@ -21,10 +21,6 @@ export const FormRegister: FC = () => {
     const [ form, handleChange ] = useForm<UserForm>({ username: `RAT:${v4().slice(0, 5)}` });
     const { registerUser } = useUser();
 
-    const onSumbitBtn = () => {
-        registerUser(form);
-    };
-
     return (
         <Card>
             <form onSubmit = { (event) => event.preventDefault() }>
@@ -41,8 +37,10 @@ export const FormRegister: FC = () => {
                     fullHeight
                     style = {{ marginTop: '10px' }}>
                     <Button
+                        padding = '5px 10px'
                         type = 'submit'
-                        onClick = { onSumbitBtn }>INTRO HOLE
+                        variant = 'submit primary'
+                        onClick = { () => registerUser(form) }>INTRO HOLE
                     </Button>
                 </ContainerCenter>
             </form>

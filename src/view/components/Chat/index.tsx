@@ -12,7 +12,7 @@ import { ContainerCenter } from '../../container';
 import { Button, Card, Input } from '../../elements';
 
 // Tools
-import { useForm } from '../../../tools/hooks';
+import { useForm, useValidation } from '../../../tools/hooks';
 
 // Utils
 import { getSliceDate } from '../../../tools/utils';
@@ -23,7 +23,6 @@ import { TextChatForm } from '../../../bus/user/types';
 // Styles
 import {
     ContainerStyled,
-    Form,
     Message,
     MessageBody,
     MessageChanged,
@@ -44,9 +43,16 @@ export const Chat: FC = () => {
         setInitialForm,
     ] = useForm<TextChatForm>({ text: null, username: user.username });
 
+    const { isValidation, handleValidation } = useValidation(!!form.text);
+
     const onSubmitButton = () => {
         createMessage(form);
         setInitialForm({ text: '', username: user.username });
+    };
+
+    const onHandleButton = (event: ChangeEvent<HTMLInputElement>) => {
+        handleChange(event, false);
+        handleValidation(form.text);
     };
 
     return (
@@ -58,12 +64,12 @@ export const Chat: FC = () => {
                 <WindowChat>
                     {messages.map((message) => (
                         <Message
-                            isOwner = { user.username === message.username }
+                            isOwner = { String(user.username === message.username) }
                             key = { message._id } >
-                            <MessageBody isOwner = { user.username === message.username }>
+                            <MessageBody isOwner = { String(user.username === message.username) }>
                                 <MessageUserName>{message.username}</MessageUserName>
                                 <MessageText>{message.text}</MessageText>
-                                <MessageDetails direction = { message.createdAt === message.updatedAt }>
+                                <MessageDetails direction = { String(message.createdAt === message.updatedAt) }>
                                     {
                                         message.createdAt === message.updatedAt
                                             ? null
@@ -80,25 +86,26 @@ export const Chat: FC = () => {
                                 </MessageDetails>
                             </MessageBody>
                         </Message>
-                    )).reverse()}
+                    ))}
                 </WindowChat>
                 <form onSubmit = { (event) => event.preventDefault() }>
                     <ContainerCenter justifyContent = 'space-between'>
                         <Input
                             containerWidth = '100%'
                             direction = 'row'
-                            id = 'text'
-                            label = 'text'
                             name = 'text'
                             style = {{ marginRight: '20px' }}
                             type = 'text'
                             value = { form.text ?? '' }
-                            onChange = { (event: ChangeEvent<HTMLInputElement>) => void handleChange(event, false) }
+                            onChange = { (event: ChangeEvent<HTMLInputElement>) => onHandleButton(event) }
                         />
                         <Button
-                            disabled = { !form.text }
+                            disabled = { !isValidation }
+                            padding = '5px 10px'
                             type = 'submit'
-                            onClick = { onSubmitButton }>SEND
+                            variant = {  'submit primary' }
+                            onClick = { onSubmitButton }>
+                            SEND
                         </Button>
 
                     </ContainerCenter>
