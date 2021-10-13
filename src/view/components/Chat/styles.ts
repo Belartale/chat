@@ -23,7 +23,7 @@ export const ContainerStyled = styled.div`
     padding: 10px;
 `;
 
-export const WindowChat: any = styled.div`
+export const WindowChat = styled.div`
     width: 100%;
     margin-bottom: 10px;
     overflow-y: auto;

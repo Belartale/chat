@@ -3,6 +3,12 @@ import styled from 'styled-components';
 
 export const KeyboardButton = styled.button``;
 
+export const GridContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(14, 1fr) / repeat(10, 1fr);
+    /* grid-template-rows: ; */
+`;
+
 export const GridContainerOne = styled.div`
     display: grid;
     grid-template-columns: repeat(14, 1fr) minmax(auto, 80px);

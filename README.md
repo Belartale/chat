@@ -64,3 +64,5 @@ IControlledError это не нужно, это альфа!!!
 
 Почитать о import { v4 } from 'uuid';
 ({ username: `RAT:${v4().slice(0, 5)}` })
+
+lodash

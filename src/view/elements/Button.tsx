@@ -31,8 +31,9 @@ const Styled = styled.button<PropTypes>`
             backgroundColor: theme.button.secondary,
         },
     } : null}
-    
-
+    &:active {
+        background-color: ${({ theme }) => theme.button.active};
+    }
 `;
 
 export const Button: FC<PropTypes> = ({ children, ...otherProps }) => {

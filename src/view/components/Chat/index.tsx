@@ -12,7 +12,7 @@ import { ContainerCenter } from '../../container';
 import { Button, Card, Input } from '../../elements';
 
 // Tools
-import { useForm, useOnKeyPress, useValidation } from '../../../tools/hooks';
+import { useForm, useValidation } from '../../../tools/hooks';
 
 // Utils
 import { getSliceDate, useToggleUseState } from '../../../tools/utils';
@@ -33,6 +33,7 @@ import {
     WindowChat,
 } from './styles';
 import { Keyboard } from '../';
+import { useInputKeyboardRedux } from '../../../bus/client/inputKeyboard';
 
 export const Chat: FC = () => {
     const refWindowChat = useRef(null);
@@ -40,27 +41,33 @@ export const Chat: FC = () => {
 
     const { user, scrollWindowChat } = useUser({ scrollWindowChatCurrent: refWindowChat.current });
     const { messages, createMessage } = useMessages();
+    const { inputKeyboardRedux, setInputKeyboardAction, resetInputKeyboardToInitial } = useInputKeyboardRedux();
     const [
         form,
         handleChange,
         setInitialForm,
-    ] = useForm<TextChatForm>({ text: null, username: user.username });
-    const { isValidation, handleValidation } = useValidation(!!form.text);
-    // ! const { keyPressState, setKeyPressState } = useOnKeyPress(null);
+    ] = useForm<TextChatForm>({ text: inputKeyboardRedux, username: user.username });
+    const { isValidation, handleValidation } = useValidation(!!inputKeyboardRedux);
+    // для клавы
     const [ keyPressState, setKeyPressState ] = useState<string | null>(null);
 
     const onSubmitButton = () => {
         createMessage(form);
         setInitialForm({ text: '', username: user.username });
+        resetInputKeyboardToInitial();
         handleValidation(null);
         scrollWindowChat(refWindowChat.current);
     };
 
     const onHandleInput = (event: ChangeEvent<HTMLInputElement>) => {
+        setInputKeyboardAction(event.target.value);
+
+        // old
         handleChange(event, false);
         handleValidation(event.target.value);
     };
 
+    //! Если мышка на WindowChat скрол отменить/ onMousEnter / onMousLeave
     return (
         <Card
             height = '75vh'
@@ -103,14 +110,13 @@ export const Chat: FC = () => {
                             name = 'text'
                             style = {{ marginRight: '20px' }}
                             type = 'text'
-                            value = { form.text ?? '' }
+                            value = { inputKeyboardRedux }
                             onChange = { (event: ChangeEvent<HTMLInputElement>) => onHandleInput(event) }
                             onKeyPress = { (event) => setKeyPressState(event.nativeEvent.key ?? null) }
                         />
                         <Button
                             disabled = { !isValidation }
                             padding = '5px 10px'
-                            type = 'submit'
                             variant = {  'submit primary' }
                             onClick = { onSubmitButton }>
                             SEND

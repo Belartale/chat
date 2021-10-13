@@ -5,7 +5,7 @@ import React, { FC, useEffect } from 'react';
 import { Button } from '../../elements';
 
 // Style
-import { GridContainerOne, GridContainerThree, GridContainerTwo, KeyboardButton } from './styles';
+import { GridContainer, GridContainerOne, GridContainerThree, GridContainerTwo, KeyboardButton } from './styles';
 
 // Types
 interface KeyboardTypes {
@@ -33,11 +33,12 @@ export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
 
     return (
         <div>
-            <GridContainerOne>
+
+            <GridContainer>
                 {[
-                    { name: 'Exc', code: '' },
+                    { name: 'Exc', code: '2' },
                     { name: '`', code: '' },
-                    { name: '1', code: '' },
+                    { name: '1', code: '23' },
                     { name: '2', code: '' },
                     { name: '3', code: '' },
                     { name: '4', code: '' },
@@ -50,7 +51,59 @@ export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
                     { name: '-', code: '' },
                     { name: '=', code: '' },
                     { name: '<=', code: '' },
-                ].map((element) => <Button { ...KeyboardButton }>{element.name}</Button>)}
+                    { name: 'Tab', code: '' },
+                    { name: 'q', code: '' },
+                    { name: 'w', code: '' },
+                    { name: 'e', code: '' },
+                    { name: 'r', code: '' },
+                    { name: 't', code: '' },
+                    { name: 'y', code: '' },
+                    { name: 'u', code: '' },
+                    { name: 'i', code: '' },
+                    { name: 'o', code: '' },
+                    { name: 'p', code: '' },
+                    { name: '[', code: '' },
+                    { name: ']', code: '' },
+                    { name: '/', code: '' },
+                    { name: 'Caps', code: '' },
+                    { name: 'a', code: '' },
+                    { name: 's', code: '' },
+                    { name: 'd', code: '' },
+                    { name: 'f', code: '' },
+                    { name: 'g', code: '' },
+                    { name: 'h', code: '' },
+                    { name: 'j', code: '' },
+                    { name: 'k', code: '' },
+                    { name: 'l', code: '' },
+                    { name: ';', code: '' },
+                    { name: '\'', code: '' },
+                    { name: 'Enter', code: '' },
+                ].map((element) => (
+                    <Button
+                        { ...KeyboardButton }
+                        id = { element.code }>{element.name}
+                    </Button>
+                ))}
+            </GridContainer>
+
+            {/* <GridContainerOne>
+                {[
+                    { name: 'Exc', code: '2' },
+                    { name: '`', code: '' },
+                    { name: '1', code: '23' },
+                    { name: '2', code: '' },
+                    { name: '3', code: '' },
+                    { name: '4', code: '' },
+                    { name: '5', code: '' },
+                    { name: '6', code: '' },
+                    { name: '7', code: '' },
+                    { name: '8', code: '' },
+                    { name: '9', code: '' },
+                    { name: '0', code: '' },
+                    { name: '-', code: '' },
+                    { name: '=', code: '' },
+                    { name: '<=', code: '' },
+                ].map((element) => <Button {...KeyboardButton} id={element.code}>{element.name}</Button>)}
             </GridContainerOne>
             <GridContainerTwo>
                 {[
@@ -86,7 +139,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
                     { name: '\'', code: '' },
                     { name: 'Enter', code: '' },
                 ].map((element) => <Button { ...KeyboardButton }>{element.name}</Button>)}
-            </GridContainerThree>
+            </GridContainerThree> */}
             {/* {[
                 { name: '', code: '' },
                 { name: '', code: '' },

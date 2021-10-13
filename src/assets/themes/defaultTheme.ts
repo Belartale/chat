@@ -3,6 +3,7 @@ export const defaultTheme = {
     button: {
         primary:   '#395afe',
         secondary: '#ff3739',
+        active:    'gray',
     },
     backgroundPage: {
         primary: '#f0efeb',

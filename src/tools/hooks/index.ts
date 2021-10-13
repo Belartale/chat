@@ -3,4 +3,3 @@ export * from './useForm';
 export * from './useSelector';
 export * from './useOnScreen';
 export * from './useValidation';
-export * from './uesKeyPress';

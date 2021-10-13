@@ -6,7 +6,7 @@ export const useValidation = (param?: boolean) => {
 
     const handleValidation = (input: string | null) => {
         if (input !== null) {
-            if (input.length > 0 && input.length < 10) {
+            if (input.trim().length > 0 && input.trim().length < 20) {
                 setIsValidation(true);
             } else {
                 setIsValidation(false);

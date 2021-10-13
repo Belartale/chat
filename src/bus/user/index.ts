@@ -44,7 +44,6 @@ export const useUser = (options?: Options) => {
         }
     }, []);
 
-
     useLayoutEffect(() => {
         if (options?.scrollWindowChatCurrent) {
             scrollWindowChat(options.scrollWindowChatCurrent);
