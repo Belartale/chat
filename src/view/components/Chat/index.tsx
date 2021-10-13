@@ -1,5 +1,5 @@
 // Core
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC, useRef } from 'react';
 
 // Bus
 import { useUser } from '../../../bus/user';
@@ -35,20 +35,21 @@ import {
 
 
 export const Chat: FC = () => {
-    const { user } = useUser();
+    const refWindowChat = useRef(null);
+    const { user, scrollWindowChat } = useUser({ scrollWindowChatCurrent: refWindowChat.current });
     const { messages, createMessage } = useMessages();
     const [
         form,
         handleChange,
         setInitialForm,
     ] = useForm<TextChatForm>({ text: null, username: user.username });
-
     const { isValidation, handleValidation } = useValidation(!!form.text);
 
     const onSubmitButton = () => {
         createMessage(form);
         setInitialForm({ text: '', username: user.username });
         handleValidation(null);
+        scrollWindowChat(refWindowChat.current);
     };
 
     const onHandleButton = (event: ChangeEvent<HTMLInputElement>) => {
@@ -62,11 +63,11 @@ export const Chat: FC = () => {
             width = '500px'>
             <ContainerStyled>
 
-                <WindowChat>
+                <WindowChat ref = { refWindowChat }>
                     {messages.map((message) => (
                         <Message
                             isOwner = { String(user.username === message.username) }
-                            key = { message._id } >
+                            key = { message._id }>
                             <MessageBody isOwner = { String(user.username === message.username) }>
                                 <MessageUserName>{message.username}</MessageUserName>
                                 <MessageText>{message.text}</MessageText>
@@ -87,7 +88,9 @@ export const Chat: FC = () => {
                                 </MessageDetails>
                             </MessageBody>
                         </Message>
-                    ))}
+                    )).reverse()
+                    }
+                    {scrollWindowChat(refWindowChat.current)}
                 </WindowChat>
                 <form onSubmit = { (event) => event.preventDefault() }>
                     <ContainerCenter justifyContent = 'space-between'>

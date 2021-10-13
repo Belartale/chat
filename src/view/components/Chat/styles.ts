@@ -1,16 +1,17 @@
 // Core
+import { DetailedHTMLProps } from 'react';
 import styled from 'styled-components';
 
 // Types
-type MessageDetailsType = {
+interface MessageDetailsTypes extends DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     direction: string;
 }
 
-type MessageType = {
+interface MessageTypes extends DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     isOwner: string;
 }
 
-type MessageBodyType = {
+interface MessageBodyTypes extends DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     isOwner: string;
 }
 
@@ -22,7 +23,7 @@ export const ContainerStyled = styled.div`
     padding: 10px;
 `;
 
-export const WindowChat = styled.div`
+export const WindowChat: any = styled.div`
     width: 100%;
     margin-bottom: 10px;
     overflow-y: auto;
@@ -31,13 +32,13 @@ export const WindowChat = styled.div`
     }
 `;
 
-export const Message = styled.div<MessageType>`
+export const Message = styled.div<MessageTypes>`
     margin-bottom: 10px;
     display: flex;
     justify-content: ${ ({ isOwner }) => isOwner === 'true' ? 'flex-end' : 'flex-start' };
 `;
 
-export const MessageBody = styled.div<MessageBodyType>`
+export const MessageBody = styled.div<MessageBodyTypes>`
     min-width: 120px;
     display: inline-block;
     padding: 10px;
@@ -56,7 +57,7 @@ export const MessageText = styled.p`
     margin: 5px 0px;
 `;
 
-export const MessageDetails = styled.div<MessageDetailsType>`
+export const MessageDetails = styled.div<MessageDetailsTypes>`
     display: flex;
     ${({ direction }) => direction === 'false' ? { justifyContent: 'space-between' } : { justifyContent: 'flex-end' }}
 `;
