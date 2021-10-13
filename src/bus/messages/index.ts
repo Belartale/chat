@@ -18,7 +18,7 @@ export const useMessages = () => {
 
     useEffect(() => {
         dispatch(actionAsync.fetchMessagesActionAsync());
-        setInterval(() => void dispatch(actionAsync.fetchMessagesActionAsync()), 10000);
+        setInterval(() => void dispatch(actionAsync.fetchMessagesActionAsync()), 5000);
     }, []);
 
     return {

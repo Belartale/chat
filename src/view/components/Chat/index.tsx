@@ -90,7 +90,6 @@ export const Chat: FC = () => {
                         </Message>
                     )).reverse()
                     }
-                    {scrollWindowChat(refWindowChat.current)}
                 </WindowChat>
                 <form onSubmit = { (event) => event.preventDefault() }>
                     <ContainerCenter justifyContent = 'space-between'>
