@@ -48,11 +48,12 @@ export const Chat: FC = () => {
     const onSubmitButton = () => {
         createMessage(form);
         setInitialForm({ text: '', username: user.username });
+        handleValidation(null);
     };
 
     const onHandleButton = (event: ChangeEvent<HTMLInputElement>) => {
         handleChange(event, false);
-        handleValidation(form.text);
+        handleValidation(event.target.value);
     };
 
     return (
