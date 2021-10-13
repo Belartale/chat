@@ -14,7 +14,7 @@ import { togglerCreatorAction } from '../client/togglers';
 
 // Types
 import { UserForm } from './types';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 
 type Options = {
     useEffectLocalStore?: boolean;
@@ -23,12 +23,13 @@ type Options = {
 
 export const useUser = (options?: Options) => {
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state);
+    const { user, messages } = useSelector((state) => state);
 
     const scrollWindowChat = (current: HTMLElement | null) => {
         if (current) {
-            let block: HTMLElement = current;
-            block.scrollTop = 9999;
+            current.scroll({
+                top: current.scrollHeight,
+            });
         }
     };
 
@@ -43,13 +44,12 @@ export const useUser = (options?: Options) => {
         }
     }, []);
 
-    //!
-    // useEffect(() => {
-    //     if (options?.scrollWindowChatCurrent) {
-    //         scrollWindowChat(options.scrollWindowChatCurrent);
-    //         console.log('some text1111');
-    //     }
-    // });
+
+    useLayoutEffect(() => {
+        if (options?.scrollWindowChatCurrent) {
+            scrollWindowChat(options.scrollWindowChatCurrent);
+        }
+    }, [ messages[ 0 ]?._id ]);
 
     return {
         user:         user,

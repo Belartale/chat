@@ -17,13 +17,11 @@ import { makeRequest } from '../../../../tools/utils';
 import * as types from '../types';
 
 export function* createMessage({ payload }: types.CreateMessageActionAsync) {
-    yield console.log(payload);
-    const result: MessageUser = yield makeRequest<MessageUser>({
+    yield makeRequest<MessageUser>({
         fetcher:           () => API.createMessage(payload),
         togglerType:       'isMessagesFetching',
         successSideEffect: function*() {
             yield put(fetchMessagesActionAsync());
         },
     });
-    yield console.log(result);
 }

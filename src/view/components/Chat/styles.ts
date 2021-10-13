@@ -55,6 +55,7 @@ export const MessageText = styled.p`
     color: ${({ theme }) => theme.message.messageFont};
     font-size: 17px;
     margin: 5px 0px;
+    word-wrap: break-word;
 `;
 
 export const MessageDetails = styled.div<MessageDetailsTypes>`

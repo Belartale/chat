@@ -1,12 +1,13 @@
 // Core
-import React, { FC, AriaAttributes, ReactElement } from 'react';
-import styled from 'styled-components';
+import React, { FC, ReactElement } from 'react';
+import styled, { css } from 'styled-components';
 
 // Types
-interface PropTypes extends AriaAttributes {
-    children: ReactElement | string;
+interface PropTypes {
+    children: ReactElement | Array<ReactElement> | string;
     height?: string;
     width?: string;
+    transformationWhen?: string
 }
 
 // Styles
@@ -16,9 +17,12 @@ const Styled = styled.div<PropTypes>`
     background-color: ${({ theme }) => theme.card.primary};
     height: ${({ height }) => height ?? 'auto'};
     width: ${({ width }) => width ?? 'auto'};
-    @media (max-width: 576px) {
-        width: 100vw;
-    }
+    ${({ transformationWhen }) => transformationWhen
+        ? css`
+        @media (max-width: ${transformationWhen}) {
+        width: 90vw;
+        }
+    ` : null }
 `;
 
 export const Card: FC<PropTypes> = ({ children, ...otherProps }) => {

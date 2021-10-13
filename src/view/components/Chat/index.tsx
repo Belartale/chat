@@ -1,5 +1,5 @@
 // Core
-import React, { ChangeEvent, FC, useRef } from 'react';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
 
 // Bus
 import { useUser } from '../../../bus/user';
@@ -12,10 +12,10 @@ import { ContainerCenter } from '../../container';
 import { Button, Card, Input } from '../../elements';
 
 // Tools
-import { useForm, useValidation } from '../../../tools/hooks';
+import { useForm, useOnKeyPress, useValidation } from '../../../tools/hooks';
 
 // Utils
-import { getSliceDate } from '../../../tools/utils';
+import { getSliceDate, useToggleUseState } from '../../../tools/utils';
 
 // Types
 import { TextChatForm } from '../../../bus/user/types';
@@ -32,10 +32,12 @@ import {
     MessageUserName,
     WindowChat,
 } from './styles';
-
+import { Keyboard } from '../';
 
 export const Chat: FC = () => {
     const refWindowChat = useRef(null);
+    const { isToggle, handleToggle } = useToggleUseState();
+
     const { user, scrollWindowChat } = useUser({ scrollWindowChatCurrent: refWindowChat.current });
     const { messages, createMessage } = useMessages();
     const [
@@ -44,6 +46,8 @@ export const Chat: FC = () => {
         setInitialForm,
     ] = useForm<TextChatForm>({ text: null, username: user.username });
     const { isValidation, handleValidation } = useValidation(!!form.text);
+    // ! const { keyPressState, setKeyPressState } = useOnKeyPress(null);
+    const [ keyPressState, setKeyPressState ] = useState<string | null>(null);
 
     const onSubmitButton = () => {
         createMessage(form);
@@ -52,17 +56,17 @@ export const Chat: FC = () => {
         scrollWindowChat(refWindowChat.current);
     };
 
-    const onHandleButton = (event: ChangeEvent<HTMLInputElement>) => {
+    const onHandleInput = (event: ChangeEvent<HTMLInputElement>) => {
         handleChange(event, false);
         handleValidation(event.target.value);
     };
 
     return (
         <Card
-            height = '60vh'
+            height = '75vh'
+            transformationWhen = '576px'
             width = '500px'>
             <ContainerStyled>
-
                 <WindowChat ref = { refWindowChat }>
                     {messages.map((message) => (
                         <Message
@@ -100,7 +104,8 @@ export const Chat: FC = () => {
                             style = {{ marginRight: '20px' }}
                             type = 'text'
                             value = { form.text ?? '' }
-                            onChange = { (event: ChangeEvent<HTMLInputElement>) => onHandleButton(event) }
+                            onChange = { (event: ChangeEvent<HTMLInputElement>) => onHandleInput(event) }
+                            onKeyPress = { (event) => setKeyPressState(event.nativeEvent.key ?? null) }
                         />
                         <Button
                             disabled = { !isValidation }
@@ -110,11 +115,20 @@ export const Chat: FC = () => {
                             onClick = { onSubmitButton }>
                             SEND
                         </Button>
+                        <Button
+                            padding = '5px 10px'
+                            style = {{ marginLeft: '5px' }}
+                            variant = { 'submit primary' }
+                            onClick = { handleToggle }>
+                            Keyboard
+                        </Button>
 
                     </ContainerCenter>
                 </form>
+                {isToggle ? <Keyboard keyPressState = { keyPressState } /> : null}
             </ContainerStyled>
         </Card>
     );
 };
+//!  onClick = { handleToggle } исправить на false
 
