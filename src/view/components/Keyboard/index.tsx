@@ -1,5 +1,6 @@
 // Core
-import React, { FC, useEffect } from 'react';
+import React, { FC, SyntheticEvent, useEffect } from 'react';
+import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
 
 // Elements
 import { Button } from '../../elements';
@@ -13,10 +14,14 @@ interface KeyboardTypes {
     keyPressState?: string | null
 }
 
+interface sss extends EventListener { target: { id: string } }
+
+
 export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
+    const { setInputMessageAction } = useInputMessageRedux();
     //!
     const eventPpess = (event: any) => {
-        console.log(event);
+        console.log(event.target.id);
     };
 
     useEffect(() => {
@@ -34,12 +39,12 @@ export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
     return (
         <div>
 
-            <GridContainer>
+            {/* <GridContainer>
                 {[
-                    { name: 'Exc', code: '2' },
-                    { name: '`', code: '' },
+                    { name: 'Exc', code: '27' },
+                    { name: '`', code: '192' },
                     { name: '1', code: '23' },
-                    { name: '2', code: '' },
+                    { name: '2', code: '49' },
                     { name: '3', code: '' },
                     { name: '4', code: '' },
                     { name: '5', code: '' },
@@ -84,9 +89,9 @@ export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
                         id = { element.code }>{element.name}
                     </Button>
                 ))}
-            </GridContainer>
+            </GridContainer> */}
 
-            {/* <GridContainerOne>
+            <GridContainerOne>
                 {[
                     { name: 'Exc', code: '2' },
                     { name: '`', code: '' },
@@ -103,7 +108,12 @@ export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
                     { name: '-', code: '' },
                     { name: '=', code: '' },
                     { name: '<=', code: '' },
-                ].map((element) => <Button {...KeyboardButton} id={element.code}>{element.name}</Button>)}
+                ].map((element) => (
+                    <Button
+                        { ...KeyboardButton }
+                        id = { element.code }>{element.name}
+                    </Button>
+                ))}
             </GridContainerOne>
             <GridContainerTwo>
                 {[
@@ -139,7 +149,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
                     { name: '\'', code: '' },
                     { name: 'Enter', code: '' },
                 ].map((element) => <Button { ...KeyboardButton }>{element.name}</Button>)}
-            </GridContainerThree> */}
+            </GridContainerThree>
             {/* {[
                 { name: '', code: '' },
                 { name: '', code: '' },

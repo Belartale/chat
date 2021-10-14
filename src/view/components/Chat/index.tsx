@@ -109,7 +109,7 @@ export const Chat: FC = () => {
                             style = {{ marginRight: '20px' }}
                             type = 'text'
                             value = { inputMessageRedux }
-                            onChange = { (event: ChangeEvent<HTMLInputElement>) => onHandleInput(event) }
+                            onChange = { (event) => onHandleInput(event) }
                             onKeyPress = { (event) => setKeyPressState(event.nativeEvent.key ?? null) }
                         />
                         <Button

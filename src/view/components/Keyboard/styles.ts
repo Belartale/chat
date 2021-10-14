@@ -6,7 +6,7 @@ export const KeyboardButton = styled.button``;
 export const GridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(14, 1fr) / repeat(10, 1fr);
-    /* grid-template-rows: ; */
+    /* grid-template-rows: 1 = re14 2 = re14 5=re11; */
 `;
 
 export const GridContainerOne = styled.div`
@@ -16,7 +16,7 @@ export const GridContainerOne = styled.div`
 
 export const GridContainerTwo = styled.div`
     display: grid;
-    grid-template-columns: repeat(15, 1fr);
+    grid-template-columns: repeat(14, 1fr);
 `;
 
 export const GridContainerThree = styled.div`
