@@ -20,7 +20,6 @@ export const useValidation = (param?: boolean) => {
         }
     };
     useLayoutEffect(() => {
-        console.log('some text');
         handleValidation(inputMessage);
     }, [ inputMessage ]);
 

@@ -130,9 +130,7 @@ export const Chat: FC = () => {
                     </form>
                 </ContainerStyled>
             </Card>
-            <Card>
-                {isToggle ? <Keyboard/> : null}
-            </Card>
+            {isToggle ? <Keyboard /> : null}
         </>
     );
 };
