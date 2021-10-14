@@ -9,6 +9,7 @@ interface PropTypes extends DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLBut
     width?: string;
     padding?: string;
     variant?: string;
+    mediaMaxWith?: string;
 }
 
 // Styles
@@ -34,6 +35,11 @@ const Styled = styled.button<PropTypes>`
     &:active {
         background-color: ${({ theme }) => theme.button.active};
     }
+    ${({ mediaMaxWith }) => mediaMaxWith ? {
+        [ `@media (max-width: ${mediaMaxWith})` ]: {
+            display: 'none',
+        },
+    } : null}
 `;
 
 export const Button: FC<PropTypes> = ({ children, ...otherProps }) => {

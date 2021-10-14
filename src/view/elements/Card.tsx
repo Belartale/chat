@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 // Types
 interface PropTypes {
-    children: ReactElement | Array<ReactElement> | string;
+    children: ReactElement | Array<ReactElement> | string | null;
     height?: string;
     width?: string;
     transformationWhen?: string

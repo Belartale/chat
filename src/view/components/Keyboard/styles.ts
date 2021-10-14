@@ -3,33 +3,20 @@ import styled from 'styled-components';
 
 export const KeyboardButton = styled.button``;
 
-export const GridContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(14, 1fr) / repeat(10, 1fr);
-    /* grid-template-rows: 1 = re14 2 = re14 5=re11; */
+// Types
+type GridContainerTypes = {
+    template: string
+}
+
+export const Container = styled.div`
+    @media (max-width: 490px) {
+        display: none;
+    }
 `;
 
-export const GridContainerOne = styled.div`
+export const GridContainer = styled.div<GridContainerTypes>`
     display: grid;
-    grid-template-columns: repeat(14, 1fr) minmax(auto, 80px);
-`;
-
-export const GridContainerTwo = styled.div`
-    display: grid;
-    grid-template-columns: repeat(14, 1fr);
-`;
-
-export const GridContainerThree = styled.div`
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-`;
-
-export const GridContainerFour = styled.div`
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-`;
-
-export const GridContainerFive = styled.div`
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
+    ${({ template }) => ({
+        gridTemplateColumns: template,
+    })}
 `;

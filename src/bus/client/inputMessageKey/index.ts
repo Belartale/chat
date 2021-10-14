@@ -1,5 +1,6 @@
 // Core
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { useLayoutEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 // Tools
@@ -15,8 +16,7 @@ export const inputMessageSlice = createSlice({
     name:     'inputMessage',
     initialState,
     reducers: {
-        inputMessageCreatorAction:        (state, action: PayloadAction<inputMessageTypes>) => action.payload,
-        resetInputMessageToInitialAction: () => initialState,
+        setInputMessageCreatorAction: (state,  action: PayloadAction<inputMessageTypes>) => action.payload,
     },
 });
 
@@ -25,17 +25,26 @@ const inputMessageActions = inputMessageSlice.actions;
 export default inputMessageSlice.reducer;
 
 export const useInputMessageRedux = () => {
+    const inputMessage: string | string[] = useSelector(({ inputMessage }) => inputMessage);
     const dispatch = useDispatch();
 
+    const setInputMessageOneSymbol = (key: string) => {
+        if (key !== 'Backspace' && key !== 'Escape') {
+            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessage + key));
+        } else if (key === 'Backspace') {
+            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessage.slice(0, -1)));
+        }
+    };
+
     return {
-        inputMessageRedux:     useSelector(({ inputMessage }) => inputMessage),
-        setInputMessageAction: (options: string) => void dispatch(
-            inputMessageActions.inputMessageCreatorAction(options),
+        inputMessageRedux:     inputMessage,
+        setInputMessageAction: (payload: string) => void  dispatch(
+            inputMessageActions.setInputMessageCreatorAction(payload),
         ),
-        resetInputMessageToInitial: () => void dispatch(inputMessageActions.resetInputMessageToInitialAction()),
+        setInputMessageOneSymbolAction: (key: string) => void setInputMessageOneSymbol(key),
     };
 };
 
 // Used ./src/tools/helpers/makeRequest
-export const inputMessageCreatorAction = inputMessageActions.inputMessageCreatorAction;
+export const setInputMessageCreatorAction = inputMessageActions.setInputMessageCreatorAction;
 
