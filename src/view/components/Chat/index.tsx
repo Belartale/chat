@@ -33,7 +33,7 @@ import {
     WindowChat,
 } from './styles';
 import { Keyboard } from '../';
-import { useInputKeyboardRedux } from '../../../bus/client/inputKeyboard';
+import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
 
 export const Chat: FC = () => {
     const refWindowChat = useRef(null);
@@ -41,28 +41,26 @@ export const Chat: FC = () => {
 
     const { user, scrollWindowChat } = useUser({ scrollWindowChatCurrent: refWindowChat.current });
     const { messages, createMessage } = useMessages();
-    const { inputKeyboardRedux, setInputKeyboardAction, resetInputKeyboardToInitial } = useInputKeyboardRedux();
+    const { inputMessageRedux, setInputMessageAction, resetInputMessageToInitial } = useInputMessageRedux();
     const [
         form,
         handleChange,
         setInitialForm,
-    ] = useForm<TextChatForm>({ text: inputKeyboardRedux, username: user.username });
-    const { isValidation, handleValidation } = useValidation(!!inputKeyboardRedux);
+    ] = useForm<TextChatForm>({ text: inputMessageRedux, username: user.username });
+    const { isValidation, handleValidation } = useValidation(!!inputMessageRedux);
     // для клавы
     const [ keyPressState, setKeyPressState ] = useState<string | null>(null);
 
     const onSubmitButton = () => {
         createMessage(form);
         setInitialForm({ text: '', username: user.username });
-        resetInputKeyboardToInitial();
+        resetInputMessageToInitial();
         handleValidation(null);
         scrollWindowChat(refWindowChat.current);
     };
 
     const onHandleInput = (event: ChangeEvent<HTMLInputElement>) => {
-        setInputKeyboardAction(event.target.value);
-
-        // old
+        setInputMessageAction(event.target.value);
         handleChange(event, false);
         handleValidation(event.target.value);
     };
@@ -110,7 +108,7 @@ export const Chat: FC = () => {
                             name = 'text'
                             style = {{ marginRight: '20px' }}
                             type = 'text'
-                            value = { inputKeyboardRedux }
+                            value = { inputMessageRedux }
                             onChange = { (event: ChangeEvent<HTMLInputElement>) => onHandleInput(event) }
                             onKeyPress = { (event) => setKeyPressState(event.nativeEvent.key ?? null) }
                         />
