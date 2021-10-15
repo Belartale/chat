@@ -151,7 +151,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                     <GridContainer template = 'repeat(3, 1fr) minmax(auto, 500px)'>
                         {[
                             { name: 'Ctrl', code: 'Control' },
-                            { name: 'Пуск', code: 'Пуск' },
+                            { name: 'Win', code: 'Win' },
                             { name: 'Alt', code: 'Alt' },
                         ].map((element) => (
                             <Button

@@ -32,7 +32,16 @@ export const useInputMessageRedux = (options?: Options) => {
 
     const setInputMessage = (payload: SetInputMessageType) => {
         if (options?.isValidationSymbol) {
-            if (payload !== 'Backspace' && payload !== 'Escape') {
+            if (
+                payload !== 'Backspace'
+            && payload !== 'Escape'
+            && payload !== 'Calps'
+            && payload !== 'Shift'
+            && payload !== 'Shift'
+            && payload !== 'Control'
+            && payload !== 'Win'
+            && payload !== 'Shift'
+            ) {
                 dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessage + payload));
             } else if (payload === 'Backspace') {
                 dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessage.slice(0, -1)));
