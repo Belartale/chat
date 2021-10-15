@@ -42,7 +42,8 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
 
         if (btn.textContent === 'En') {
             setTogglerAction({ type: 'isKeyboardEnglish', value: false });
-        } else {
+        }
+        if (btn.textContent === 'Ру') {
             setTogglerAction({ type: 'isKeyboardEnglish', value: true });
         }
 
