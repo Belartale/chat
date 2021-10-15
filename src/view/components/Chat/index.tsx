@@ -87,12 +87,6 @@ export const Chat: FC = () => {
                                                         onClick = { () => deleteMessage(message._id) }>
                                                         Delete
                                                     </Button>
-                                                    {/* <Button
-                                                        style = {{ marginLeft: '5px' }}
-                                                        variant = { 'submit primary' }
-                                                        onClick = { () => setTogglerListenerAction({ type: 'isChangeMessage', value: message._id }) }>
-                                                        {togglersRedux.isChangeMessage === message._id ? 'Change' : 'Cancel'}
-                                                    </Button> */}
                                                 </ContainerCenter>
                                             ) : null}
                                         </ContainerCenter>
