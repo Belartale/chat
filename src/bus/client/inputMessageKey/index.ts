@@ -6,12 +6,14 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from '../../../tools/hooks';
 
 const initialState = {
+    onFocus:                null,
     inputChatMessage:       '',
     inputChatMessageChange: '', // для фазы 2 (Опционально), Edit
 };
 
 // Types
 export type InputMessageTypes = {
+    onFocus?:                string | null,
     inputChatMessage?:       string,
     inputChatMessageChange?: string,
 };
@@ -22,6 +24,11 @@ export const inputMessageSlice = createSlice({
     name:     'inputMessage',
     initialState,
     reducers: {
+        setOnFocusForInputMessageCreatorAction: (
+            state: InputMessageTypes,
+            action: PayloadAction<string>,
+        ) => { state.onFocus = action.payload; },
+
         setInputMessageCreatorAction: (
             state: InputMessageTypes,
             action: PayloadAction<string>,
@@ -63,8 +70,11 @@ export const useInputMessageRedux = () => {
     };
 
     return {
-        inputMessageRedux:            inputMessageState,
-        setInputMessageRedux:         (payload: string) => void setInputMessage(payload),
-        setInputMessageKeyboardRedux: (payload: string) => void setInputMessageKeyboard(payload),
+        inputMessageRedux:              inputMessageState,
+        setInputMessageRedux:           (payload: string) => void setInputMessage(payload),
+        setInputMessageKeyboardRedux:   (payload: string) => void setInputMessageKeyboard(payload),
+        setOnFocusForInputMessageRedux: (payload: string) => void dispatch(
+            inputMessageActions.setOnFocusForInputMessageCreatorAction(payload),
+        ),
     };
 };

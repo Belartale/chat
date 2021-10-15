@@ -16,36 +16,9 @@ interface KeyboardTypes {
 export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
     const { setInputMessageKeyboardRedux } = useInputMessageRedux();
 
-
-    // const [ arrayState, setArray ] = useState([ '1' ]);
-
-    // const eventKeydown = (event: any) => {
-    //     if (!arrayState.includes(event.key)) {
-    //         setArray(event.key);
-    //         console.log('some text');
-    //     }
-    // };
-
-    // const eventKeyup = (event: any) => {
-    //     console.log(arrayState);
-    // };
-    // useLayoutEffect(() => {
-    //     document.addEventListener('keydown', eventKeydown); // нажать
-    //     document.addEventListener('keyup', eventKeyup); // отпустить
-
-
-    //     return () => {
-    //         document.removeEventListener('keydown', eventKeydown);
-    //         document.removeEventListener('keyup', eventKeyup);
-    //     };
-    // }, []);
-
-
     const KeyboardButton = {
         variant: 'submit primary',
     };
-
-    // console.log(keysData.firstLine);
 
     return (
         <Card>
