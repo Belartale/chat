@@ -1,12 +1,8 @@
 // Core
 import { useLayoutEffect, useState } from 'react';
 
-// Tools
-import { useSelector } from './';
-
-export const useValidation = (param?: boolean) => {
-    const inputMessage: string | string[] = useSelector(({ inputMessage }) => inputMessage);
-    const [ isValidation, setIsValidation ] = useState<boolean>(param ?? false);
+export const useValidation = (value: string) => {
+    const [ isValidation, setIsValidation ] = useState<boolean>(false);
 
     const handleValidation = (input: string | null) => {
         if (input !== null) {
@@ -20,8 +16,8 @@ export const useValidation = (param?: boolean) => {
         }
     };
     useLayoutEffect(() => {
-        handleValidation(inputMessage);
-    }, [ inputMessage ]);
+        handleValidation(value);
+    }, [ value ]);
 
     return {
         isValidation,

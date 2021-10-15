@@ -1,5 +1,5 @@
 // Core
-import React, { FC } from 'react';
+import React, { FC, useLayoutEffect, useState } from 'react';
 import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
 
 // Elements
@@ -14,12 +14,38 @@ interface KeyboardTypes {
 }
 
 export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
-    const { setInputMessageRedux } = useInputMessageRedux({ isValidationSymbol: true });
+    const { setInputMessageKeyboardRedux } = useInputMessageRedux();
+
+
+    // const [ arrayState, setArray ] = useState([ '1' ]);
+
+    // const eventKeydown = (event: any) => {
+    //     if (!arrayState.includes(event.key)) {
+    //         setArray(event.key);
+    //         console.log('some text');
+    //     }
+    // };
+
+    // const eventKeyup = (event: any) => {
+    //     console.log(arrayState);
+    // };
+    // useLayoutEffect(() => {
+    //     document.addEventListener('keydown', eventKeydown); // нажать
+    //     document.addEventListener('keyup', eventKeyup); // отпустить
+
+
+    //     return () => {
+    //         document.removeEventListener('keydown', eventKeydown);
+    //         document.removeEventListener('keyup', eventKeyup);
+    //     };
+    // }, []);
 
 
     const KeyboardButton = {
         variant: 'submit primary',
     };
+
+    // console.log(keysData.firstLine);
 
     return (
         <Card>
@@ -44,14 +70,14 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                             { name: '<=', code: 'Backspace' },
                         ].map((element) => (
                             <Button
-                                onClick = { () => setInputMessageRedux(element.code) }
+                                onClick = { () => setInputMessageKeyboardRedux(element.code) }
                                 { ...KeyboardButton }>{element.name}
                             </Button>
                         ))}
                     </GridContainer>
                     <GridContainer template = 'repeat(14, 1fr)'>
                         <Button
-                            onClick = { () => setInputMessageRedux('  ') }
+                            onClick = { () => setInputMessageKeyboardRedux('  ') }
                             { ...KeyboardButton }>Tab
                         </Button>
                         {[
@@ -70,7 +96,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                             { name: '/', code: '/' },
                         ].map((element) => (
                             <Button
-                                onClick = { () => setInputMessageRedux(element.code) }
+                                onClick = { () => setInputMessageKeyboardRedux(element.code) } // 23 > w
                                 { ...KeyboardButton }>{element.name}
                             </Button>
                         ))}
@@ -92,7 +118,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                             { name: '\'', code: '\'' },
                         ].map((element) => (
                             <Button
-                                onClick = { () => setInputMessageRedux(element.code) }
+                                onClick = { () => setInputMessageKeyboardRedux(element.code) }
                                 { ...KeyboardButton }>{element.name}
                             </Button>
                         ))}
@@ -116,7 +142,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                             { name: '/', code: '/' },
                         ].map((element) => (
                             <Button
-                                onClick = { () => setInputMessageRedux(element.code) }
+                                onClick = { () => setInputMessageKeyboardRedux(element.code) }
                                 { ...KeyboardButton }>{element.name}
                             </Button>
                         ))}
@@ -128,12 +154,12 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                             { name: 'Alt', code: 'Alt' },
                         ].map((element) => (
                             <Button
-                                onClick = { () => setInputMessageRedux(element.code) }
+                                onClick = { () => setInputMessageKeyboardRedux(element.code) }
                                 { ...KeyboardButton }>{element.name}
                             </Button>
                         ))}
                         <Button
-                            onClick = { () => setInputMessageRedux(' ') }
+                            onClick = { () => setInputMessageKeyboardRedux(' ') }
                             { ...KeyboardButton }>Space
                         </Button>
                     </GridContainer>

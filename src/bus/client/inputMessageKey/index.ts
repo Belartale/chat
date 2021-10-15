@@ -5,19 +5,32 @@ import { useDispatch } from 'react-redux';
 // Tools
 import { useSelector } from '../../../tools/hooks';
 
-const initialState = '';
+const initialState = {
+    inputChatMessage:       '',
+    inputChatMessageChange: '', // для фазы 2 (Опционально), Edit
+};
 
 // Types
-export type InputMessageTypes = string;
-type Options = { isValidationSymbol?: boolean };
-type SetInputMessageType = string;
+export type InputMessageTypes = {
+    inputChatMessage?:       string,
+    inputChatMessageChange?: string,
+};
+// type SetInputMessageType = typeof initialState;
 
 // Slice
 export const inputMessageSlice = createSlice({
     name:     'inputMessage',
     initialState,
     reducers: {
-        setInputMessageCreatorAction: (state,  action: PayloadAction<InputMessageTypes>) => action.payload,
+        setInputMessageCreatorAction: (
+            state: InputMessageTypes,
+            action: PayloadAction<string>,
+        ) => { state.inputChatMessage = action.payload; },
+
+        setInputChatMessageChangeCreatorAction: (
+            state: InputMessageTypes,
+            action: PayloadAction<string>,
+        ) => { state.inputChatMessageChange = action.payload; },
     },
 });
 
@@ -25,37 +38,33 @@ export const inputMessageSlice = createSlice({
 const inputMessageActions = inputMessageSlice.actions;
 export default inputMessageSlice.reducer;
 
-export const useInputMessageRedux = (options?: Options) => {
-    const inputMessage = useSelector(({ inputMessage }) => inputMessage);
+export const useInputMessageRedux = () => {
+    const inputMessageState = useSelector(({ inputMessage }) => inputMessage);
     const dispatch = useDispatch();
 
-
-    const setInputMessage = (payload: SetInputMessageType) => {
-        if (options?.isValidationSymbol) {
-            if (
-                payload !== 'Backspace'
+    const setInputMessageKeyboard = (payload: string) => {
+        if (
+            payload !== 'Backspace'
             && payload !== 'Escape'
             && payload !== 'Calps'
-            && payload !== 'Shift'
             && payload !== 'Shift'
             && payload !== 'Control'
             && payload !== 'Win'
             && payload !== 'Shift'
-            ) {
-                dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessage + payload));
-            } else if (payload === 'Backspace') {
-                dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessage.slice(0, -1)));
-            }
-        } else {
-            dispatch(inputMessageActions.setInputMessageCreatorAction(payload));
+        ) {
+            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.inputChatMessage + payload));
+        } else if (payload === 'Backspace') {
+            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.inputChatMessage.slice(0, -1)));
         }
     };
 
+    const setInputMessage = (payload: string) => {
+        dispatch(inputMessageActions.setInputMessageCreatorAction(payload));
+    };
+
     return {
-        inputMessageRedux:    inputMessage,
-        setInputMessageRedux: (payload: SetInputMessageType) => void  setInputMessage(payload),
+        inputMessageRedux:            inputMessageState,
+        setInputMessageRedux:         (payload: string) => void setInputMessage(payload),
+        setInputMessageKeyboardRedux: (payload: string) => void setInputMessageKeyboard(payload),
     };
 };
-
-// Used ./src/tools/helpers/makeRequest
-export const setInputMessageCreatorAction = inputMessageActions.setInputMessageCreatorAction;

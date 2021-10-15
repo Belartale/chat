@@ -46,10 +46,10 @@ export const Chat: FC = () => {
         inputMessageRedux,
         setInputMessageRedux,
     } = useInputMessageRedux();
-    const { isValidation, handleValidation } = useValidation(!!inputMessageRedux);
+    const { isValidation, handleValidation } = useValidation(inputMessageRedux.inputChatMessage);
 
     const onSubmitButton = () => {
-        createMessage({ text: inputMessageRedux, username: user.username });
+        createMessage({ text: inputMessageRedux.inputChatMessage, username: user.username });
         setInputMessageRedux('');
         handleValidation(null);
         scrollWindowChat(refWindowChat.current);
@@ -57,7 +57,7 @@ export const Chat: FC = () => {
 
     const onHandleInput = (event: ChangeEvent<HTMLInputElement>) => {
         setInputMessageRedux(event.target.value);
-        handleValidation(inputMessageRedux);
+        handleValidation(inputMessageRedux.inputChatMessage);
     };
 
     return (
@@ -87,6 +87,12 @@ export const Chat: FC = () => {
                                                         onClick = { () => deleteMessage(message._id) }>
                                                         Delete
                                                     </Button>
+                                                    {/* <Button
+                                                        style = {{ marginLeft: '5px' }}
+                                                        variant = { 'submit primary' }
+                                                        onClick = { () => setTogglerListenerAction({ type: 'isChangeMessage', value: message._id }) }>
+                                                        {togglersRedux.isChangeMessage === message._id ? 'Change' : 'Cancel'}
+                                                    </Button> */}
                                                 </ContainerCenter>
                                             ) : null}
                                         </ContainerCenter>
@@ -119,7 +125,7 @@ export const Chat: FC = () => {
                                 name = 'text'
                                 style = {{ marginRight: '20px' }}
                                 type = 'text'
-                                value = { inputMessageRedux }
+                                value = { inputMessageRedux.inputChatMessage }
                                 onChange = { (event) => onHandleInput(event) }
                             />
                             <Button
