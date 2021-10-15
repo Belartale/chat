@@ -13,7 +13,6 @@ import { makeRequest } from '../../../../tools/utils';
 export function* fetchMessages() {
     yield makeRequest<MessagesState>({
         fetcher:          API.fetchMessages,
-        togglerType:      'isMessagesFetching',
         succesAction:     messagesActions.setMessages,
         isControlledMode: true,
     });

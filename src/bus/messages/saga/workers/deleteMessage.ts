@@ -2,7 +2,6 @@
 import { put } from 'redux-saga/effects';
 
 // Types
-import { MessageUser } from '../../types';
 
 // Actions
 import { fetchMessagesActionAsync } from '../actions';
@@ -16,9 +15,9 @@ import { makeRequest } from '../../../../tools/utils';
 // Types
 import * as types from '../types';
 
-export function* createMessage({ payload }: types.CreateMessageActionAsync) {
-    yield makeRequest<MessageUser>({
-        fetcher:           () => API.createMessage(payload),
+export function* deleteMessage({ payload }: types.DeleteMessageActionAsync) {
+    yield makeRequest({
+        fetcher:           () => API.deleteMessage(payload),
         successSideEffect: function*() {
             yield put(fetchMessagesActionAsync());
         },

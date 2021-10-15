@@ -6,6 +6,8 @@ export const KeyboardButton = styled.button``;
 // Types
 type GridContainerTypes = {
     template: string
+    order?: number
+    style?: object
 }
 
 export const Container = styled.div`
@@ -16,7 +18,8 @@ export const Container = styled.div`
 
 export const GridContainer = styled.div<GridContainerTypes>`
     display: grid;
-    ${({ template }) => ({
+    ${({ template, order }) => ({
         gridTemplateColumns: template,
+        order:               order,
     })}
 `;

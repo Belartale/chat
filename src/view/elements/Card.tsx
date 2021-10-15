@@ -1,10 +1,10 @@
 // Core
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 // Types
 interface PropTypes {
-    children: ReactElement | Array<ReactElement> | string | null;
+    children: ReactNode;
     height?: string;
     width?: string;
     transformationWhen?: string

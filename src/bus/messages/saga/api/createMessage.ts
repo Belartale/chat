@@ -3,9 +3,9 @@ import { ControlledError } from '../../../../tools/utils';
 import { API_URL } from '../../../../init/constants';
 
 // Types
-import * as types from '../../types';
+import { CreateMessageContract } from './types';
 
-export const createMessage: (message: types.MessageUser) => Promise<types.Message> = async (message) => {
+export const createMessage: CreateMessageContract = async (message) => {
     const response = await fetch(`${API_URL}/messages`, {
         method:  'POST',
         headers: {
@@ -16,7 +16,7 @@ export const createMessage: (message: types.MessageUser) => Promise<types.Messag
 
     if (response.status !== 201) {
         throw new ControlledError({
-            message:    'fetchMessages failed',
+            message:    'createMessage failed',
             statusCode: response.status,
         });
     }

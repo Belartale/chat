@@ -26,6 +26,7 @@ const Chat: FC = () => {
                 <ShowUserName />
                 <Button
                     padding = '5px 10px'
+                    style = {{ marginLeft: '5px' }}
                     variant = 'submit secondary'
                     onClick = { logoutUser }>Logout
                 </Button>

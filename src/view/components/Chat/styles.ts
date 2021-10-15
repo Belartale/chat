@@ -3,15 +3,17 @@ import { DetailedHTMLProps } from 'react';
 import styled from 'styled-components';
 
 // Types
-interface MessageDetailsTypes extends DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+
+type DivTypes = DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+interface MessageDetailsTypes extends DivTypes {
     direction: string;
 }
 
-interface MessageTypes extends DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+interface MessageTypes extends DivTypes {
     isOwner: string;
 }
 
-interface MessageBodyTypes extends DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+interface MessageBodyTypes extends DivTypes {
     isOwner: string;
 }
 

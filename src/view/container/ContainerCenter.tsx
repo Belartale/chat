@@ -1,5 +1,5 @@
 // Core
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 // Types
@@ -9,7 +9,7 @@ interface PropTypes {
     justifyContent?: string;
     fullHeight?: boolean;
     style?: object;
-    children: ReactElement | Array<ReactElement> | string | Array<ReactElement> & string;
+    children: ReactNode;
 }
 
 const ContainerCenterStyled = styled.div<PropTypes>`

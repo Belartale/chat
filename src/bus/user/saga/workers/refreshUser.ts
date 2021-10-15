@@ -18,15 +18,14 @@ import { makeRequest, userLocalStore } from '../../../../tools/utils';
 export function* refreshUser(action: RefreshUserActionAsync) {
     const result: User = yield makeRequest<User>({
         fetcher:           () => API.refreshUser(action.payload),
-        togglerType:       'isRefreshUser',
         succesAction:      uesrActions.setUser,
-        successSideEffect: (result) => {
+        successSideEffect: function*(result) {
             if (result._id) {
-                userLocalStore.setRefreshToken(result._id);
+                yield userLocalStore.setRefreshToken(result._id);
             }
         },
-        errorSideEffect: () => {
-            userLocalStore.remoteRefreshToken();
+        errorSideEffect: function*() {
+            yield userLocalStore.remoteRefreshToken();
         },
     });
 

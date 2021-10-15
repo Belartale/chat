@@ -14,3 +14,11 @@ export type CreateMessageActionAsync = {
     payload: types.MessageUser
 };
 export type CreateMessageContract = (payload: types.MessageUser) => CreateMessageActionAsync
+
+// Types DELETE
+export const DELETE_MESSAGE_ASYNC = 'DELETE_MESSAGE_ASYNC';
+export type DeleteMessageActionAsync = {
+    type: typeof DELETE_MESSAGE_ASYNC;
+    payload: string
+};
+export type DeleteMessageContract = (payload: string) => DeleteMessageActionAsync

@@ -1,9 +1,11 @@
 // Core
-import React, { ChangeEvent, FC, useRef, useState } from 'react';
+import React, { ChangeEvent, FC, useRef } from 'react';
 
 // Bus
 import { useUser } from '../../../bus/user';
 import { useMessages } from '../../../bus/messages';
+import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
+import { useTogglersRedux } from '../../../bus/client/togglers';
 
 // Container
 import { ContainerCenter } from '../../container';
@@ -11,14 +13,14 @@ import { ContainerCenter } from '../../container';
 // Elements
 import { Button, Card, Input } from '../../elements';
 
-// Tools
-import { useForm, useValidation } from '../../../tools/hooks';
+// Components
+import { Keyboard } from '../';
+
+// Hooks
+import { useValidation } from '../../../tools/hooks';
 
 // Utils
-import { getSliceDate, useToggleUseState } from '../../../tools/utils';
-
-// Types
-import { TextChatForm } from '../../../bus/user/types';
+import { getSliceDate } from '../../../tools/utils';
 
 // Styles
 import {
@@ -32,37 +34,32 @@ import {
     MessageUserName,
     WindowChat,
 } from './styles';
-import { Keyboard } from '../';
-import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
+
 
 export const Chat: FC = () => {
     const refWindowChat = useRef(null);
-    const { isToggle, handleToggle } = useToggleUseState();
+    const { togglersRedux, setTogglerListenerAction } = useTogglersRedux();
 
     const { user, scrollWindowChat } = useUser({ scrollWindowChatCurrent: refWindowChat.current });
-    const { messages, createMessage } = useMessages();
+    const { messages, createMessage, deleteMessage } = useMessages();
     const {
         inputMessageRedux,
-        setInputMessageAction,
-        setInputMessageOneSymbolAction,
+        setInputMessageRedux,
     } = useInputMessageRedux();
     const { isValidation, handleValidation } = useValidation(!!inputMessageRedux);
-    // для клавы
-    // const [ keyPressState, setKeyPressState ] = useState<string | null>(null);
 
     const onSubmitButton = () => {
         createMessage({ text: inputMessageRedux, username: user.username });
-        setInputMessageAction('');
+        setInputMessageRedux('');
         handleValidation(null);
         scrollWindowChat(refWindowChat.current);
     };
 
     const onHandleInput = (event: ChangeEvent<HTMLInputElement>) => {
-        setInputMessageAction(event.target.value);
+        setInputMessageRedux(event.target.value);
         handleValidation(inputMessageRedux);
     };
 
-    //! Если мышка на WindowChat скрол отменить/ onMousEnter / onMousLeave
     return (
         <>
             <Card
@@ -71,31 +68,53 @@ export const Chat: FC = () => {
                 width = '500px'>
                 <ContainerStyled>
                     <WindowChat ref = { refWindowChat }>
-                        {messages.map((message) => (
-                            <Message
-                                isOwner = { String(user.username === message.username) }
-                                key = { message._id }>
-                                <MessageBody isOwner = { String(user.username === message.username) }>
-                                    <MessageUserName>{message.username}</MessageUserName>
-                                    <MessageText>{message.text}</MessageText>
-                                    <MessageDetails direction = { String(message.createdAt === message.updatedAt) }>
-                                        {
-                                            message.createdAt === message.updatedAt
-                                                ? null
-                                                : (
-                                                    <MessageChanged>
-                                                        Changed
-                                                    </MessageChanged>
-                                                )
-                                        }
+                        {messages.map((message) => {
+                            let comparisonNames = user.username === message.username;
+                            let comparisonNamesFalse = user.username !== message.username;
 
-                                        <MessageDate>
-                                            {getSliceDate(message.createdAt)}
-                                        </MessageDate>
-                                    </MessageDetails>
-                                </MessageBody>
-                            </Message>
-                        )).reverse()
+                            return (
+                                <Message
+                                    isOwner = { String(comparisonNames) }
+                                    key = { message._id }>
+                                    <MessageBody isOwner = { String(comparisonNames) }>
+                                        <ContainerCenter justifyContent = { comparisonNamesFalse ? 'space-between' : 'flex-end' }>
+                                            {comparisonNamesFalse
+                                                ? <MessageUserName>{message.username}</MessageUserName> : null}
+                                            {comparisonNames ? (
+                                                <ContainerCenter>
+                                                    <Button
+                                                        variant = { 'submit primary' }
+                                                        onClick = { () => deleteMessage(message._id) }>
+                                                        Delete
+                                                    </Button>
+                                                    <Button
+                                                        style = {{ marginLeft: '5px' }}
+                                                        variant = { 'submit primary' }
+                                                        onClick = { () => setTogglerListenerAction({ type: 'isChangeMessage', value: message._id }) }>
+                                                        {togglersRedux.isChangeMessage === message._id ? 'Change' : 'Cancel'}
+                                                    </Button>
+                                                </ContainerCenter>
+                                            ) : null}
+                                        </ContainerCenter>
+                                        <MessageText>{message.text}</MessageText>
+                                        <MessageDetails direction = { String(message.createdAt === message.updatedAt) }>
+                                            {
+                                                message.createdAt === message.updatedAt
+                                                    ? null
+                                                    : (
+                                                        <MessageChanged>
+                                                            Changed
+                                                        </MessageChanged>
+                                                    )
+                                            }
+                                            <MessageDate>
+                                                {getSliceDate(message.createdAt)}
+                                            </MessageDate>
+                                        </MessageDetails>
+                                    </MessageBody>
+                                </Message>
+                            );
+                        }).reverse()
                         }
                     </WindowChat>
                     <form onSubmit = { (event) => event.preventDefault() }>
@@ -109,7 +128,6 @@ export const Chat: FC = () => {
                                 value = { inputMessageRedux }
                                 onChange = { (event) => onHandleInput(event) }
                             />
-                            {/* onKeyPress = { (event) => setKeyPressState(event.nativeEvent.key ?? null) } */}
                             <Button
                                 disabled = { !isValidation }
                                 padding = '5px 10px'
@@ -122,7 +140,7 @@ export const Chat: FC = () => {
                                 padding = '5px 10px'
                                 style = {{ marginLeft: '5px' }}
                                 variant = { 'submit primary' }
-                                onClick = { handleToggle }>
+                                onClick = { () => setTogglerListenerAction({ type: 'isKeyboard' }) }>
                                 Keyboard
                             </Button>
 
@@ -130,9 +148,7 @@ export const Chat: FC = () => {
                     </form>
                 </ContainerStyled>
             </Card>
-            {isToggle ? <Keyboard /> : null}
+            {togglersRedux.isKeyboard ? <Keyboard onSubmitButton = { onSubmitButton } /> : null}
         </>
     );
 };
-//!  onClick = { handleToggle } исправить на false
-

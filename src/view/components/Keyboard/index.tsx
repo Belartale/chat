@@ -1,6 +1,7 @@
 // Core
-import React, { FC, SyntheticEvent, useEffect } from 'react';
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
+import { keysData } from '../../../tools/utils/keysData';
 
 // Elements
 import { Button, Card } from '../../elements';
@@ -10,126 +11,161 @@ import { Container, GridContainer } from './styles';
 
 // Types
 interface KeyboardTypes {
-    // setKeyPressState?: Function
-    keyPressState?: string | null
+    onSubmitButton: Function
 }
 
-interface sss extends EventListener { target: { id: string } }
+export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
+    const { setInputMessageRedux } = useInputMessageRedux({ isValidationSymbol: true });
 
 
-export const Keyboard: FC<KeyboardTypes> = ({ keyPressState }) => {
-    const { inputMessageRedux, setInputMessageOneSymbolAction, setInputMessageAction } = useInputMessageRedux();
-    //!
-    const eventPpess = (event: any) => {
-        // console.log(event.target.id);
+    const [ arrayState, setArray ] = useState([ '1' ]);
+
+    const eventKeydown = (event: any) => {
+        if (!arrayState.includes(event.key)) {
+            setArray(event.key);
+            console.log('some text');
+        }
     };
 
-    useEffect(() => {
-        document.addEventListener('keypress', eventPpess);
+    const eventKeyup = (event: any) => {
+        console.log(arrayState);
+    };
+    useLayoutEffect(() => {
+        document.addEventListener('keydown', eventKeydown); // нажать
+        document.addEventListener('keyup', eventKeyup); // отпустить
+
 
         return () => {
-            document.removeEventListener('keypress', eventPpess);
+            document.removeEventListener('keydown', eventKeydown);
+            document.removeEventListener('keyup', eventKeyup);
         };
-    });
+    }, []);
+
 
     const KeyboardButton = {
         variant: 'submit primary',
     };
 
+    // console.log(keysData.firstLine);
+
     return (
         <Card>
-            <Container>
-                <GridContainer template = 'repeat(14, 1fr) minmax(auto, 80px)'>
-                    {[
-                        { name: 'Exc', code: 'Escape' },
-                        { name: '`', code: '`' },
-                        { name: '1', code: '1' },
-                        { name: '2', code: '2' },
-                        { name: '3', code: '3' },
-                        { name: '4', code: '4' },
-                        { name: '5', code: '5' },
-                        { name: '6', code: '6' },
-                        { name: '7', code: '7' },
-                        { name: '8', code: '8' },
-                        { name: '9', code: '9' },
-                        { name: '0', code: '0' },
-                        { name: '-', code: '-' },
-                        { name: '=', code: '=' },
-                        { name: '<=', code: 'Backspace' },
-                    ].map((element) => (
+            <div>
+                <Container>
+                    <GridContainer template = 'repeat(14, 1fr) minmax(auto, 80px)'>
+                        {[
+                            { name: 'Exc', code: 'Escape' },
+                            { name: '`', code: '`' },
+                            { name: '1', code: '1' },
+                            { name: '2', code: '2' },
+                            { name: '3', code: '3' },
+                            { name: '4', code: '4' },
+                            { name: '5', code: '5' },
+                            { name: '6', code: '6' },
+                            { name: '7', code: '7' },
+                            { name: '8', code: '8' },
+                            { name: '9', code: '9' },
+                            { name: '0', code: '0' },
+                            { name: '-', code: '-' },
+                            { name: '=', code: '=' },
+                            { name: '<=', code: 'Backspace' },
+                        ].map((element) => (
+                            <Button
+                                onClick = { () => setInputMessageRedux(element.code) }
+                                { ...KeyboardButton }>{element.name}
+                            </Button>
+                        ))}
+                    </GridContainer>
+                    <GridContainer template = 'repeat(14, 1fr)'>
                         <Button
-                            onClick = { () => setInputMessageOneSymbolAction(element.code) }
-                            { ...KeyboardButton }>{element.name}
+                            onClick = { () => setInputMessageRedux('  ') }
+                            { ...KeyboardButton }>Tab
                         </Button>
-                    ))}
-                </GridContainer>
-                <GridContainer template = 'repeat(14, 1fr)'>
-                    {[
-                        { name: 'Tab', code: 'Tab' },
-                        { name: 'q', code: 'q' },
-                        { name: 'w', code: 'w' },
-                        { name: 'e', code: 'e' },
-                        { name: 'r', code: 'r' },
-                        { name: 't', code: 't' },
-                        { name: 'y', code: 'y' },
-                        { name: 'u', code: 'u' },
-                        { name: 'i', code: 'i' },
-                        { name: 'o', code: 'o' },
-                        { name: 'p', code: 'p' },
-                        { name: '[', code: '[' },
-                        { name: ']', code: ']' },
-                        { name: '/', code: '/' },
-                    ].map((element) => (
+                        {[
+                            { name: 'q', code: 'q' },
+                            { name: 'w', code: 'w' },
+                            { name: 'e', code: 'e' },
+                            { name: 'r', code: 'r' },
+                            { name: 't', code: 't' },
+                            { name: 'y', code: 'y' },
+                            { name: 'u', code: 'u' },
+                            { name: 'i', code: 'i' },
+                            { name: 'o', code: 'o' },
+                            { name: 'p', code: 'p' },
+                            { name: '[', code: '[' },
+                            { name: ']', code: ']' },
+                            { name: '/', code: '/' },
+                        ].map((element) => (
+                            <Button
+                                onClick = { () => setInputMessageRedux(element.code) }
+                                { ...KeyboardButton }>{element.name}
+                            </Button>
+                        ))}
+                    </GridContainer>
+                    <GridContainer
+                        template = 'repeat(13, 1fr)'>
+                        {[
+                            { name: 'Caps', code: 'Calps' },
+                            { name: 'a', code: 'a' },
+                            { name: 's', code: 's' },
+                            { name: 'd', code: 'd' },
+                            { name: 'f', code: 'f' },
+                            { name: 'g', code: 'g' },
+                            { name: 'h', code: 'h' },
+                            { name: 'j', code: 'j' },
+                            { name: 'k', code: 'k' },
+                            { name: 'l', code: 'l' },
+                            { name: ';', code: ';' },
+                            { name: '\'', code: '\'' },
+                        ].map((element) => (
+                            <Button
+                                onClick = { () => setInputMessageRedux(element.code) }
+                                { ...KeyboardButton }>{element.name}
+                            </Button>
+                        ))}
                         <Button
-                            onClick = { () => setInputMessageOneSymbolAction(element.code) }
-                            { ...KeyboardButton }>{element.name}
+                            onClick = { () => onSubmitButton() }
+                            { ...KeyboardButton }>Enter
                         </Button>
-                    ))}
-                </GridContainer>
-                <GridContainer template = 'repeat(13, 1fr)'>
-                    {[
-                        { name: 'Caps', code: 'Calps' },
-                        { name: 'a', code: 'a' },
-                        { name: 's', code: 's' },
-                        { name: 'd', code: 'd' },
-                        { name: 'f', code: 'f' },
-                        { name: 'g', code: 'g' },
-                        { name: 'h', code: 'h' },
-                        { name: 'j', code: 'j' },
-                        { name: 'k', code: 'k' },
-                        { name: 'l', code: 'l' },
-                        { name: ';', code: ';' },
-                        { name: '\'', code: '\'' },
-                        { name: 'Enter', code: 'Enter' },
-                    ].map((element) => (
+                    </GridContainer>
+                    <GridContainer template = 'repeat(11, 1fr)'>
+                        {[
+                            { name: 'Shift', code: 'Shift' },
+                            { name: 'z', code: 'z' },
+                            { name: 'x', code: 'x' },
+                            { name: 'c', code: 'c' },
+                            { name: 'v', code: 'v' },
+                            { name: 'b', code: 'b' },
+                            { name: 'n', code: 'n' },
+                            { name: 'm', code: 'm' },
+                            { name: ',', code: ',' },
+                            { name: '.', code: '.' },
+                            { name: '/', code: '/' },
+                        ].map((element) => (
+                            <Button
+                                onClick = { () => setInputMessageRedux(element.code) }
+                                { ...KeyboardButton }>{element.name}
+                            </Button>
+                        ))}
+                    </GridContainer>
+                    <GridContainer template = 'repeat(3, 1fr) minmax(auto, 500px)'>
+                        {[
+                            { name: 'Ctrl', code: 'Control' },
+                            { name: 'Пуск', code: 'Пуск' },
+                            { name: 'Alt', code: 'Alt' },
+                        ].map((element) => (
+                            <Button
+                                onClick = { () => setInputMessageRedux(element.code) }
+                                { ...KeyboardButton }>{element.name}
+                            </Button>
+                        ))}
                         <Button
-                            onClick = { () => setInputMessageOneSymbolAction(element.code) }
-                            { ...KeyboardButton }>{element.name}
+                            onClick = { () => setInputMessageRedux(' ') }
+                            { ...KeyboardButton }>Space
                         </Button>
-                    ))}
-                </GridContainer>
-                {/* {[
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-                { name: '', code: '' },
-            ].map((element) => <div>{element}</div>)} */}
-            </Container>
+                    </GridContainer>
+                </Container>
+            </div>
         </Card>
     );
 };
-
-// { [ {name: '', code: ''}, {name: '', code: ''}, {name: '', code: ''}, {name: '', code: ''}, {name: '', code: ''}, {name: '', code: ''}, {name: '', code: ''}, {name: '', code: ''}, ].map((element) => <div>{element}</div>) }
-
-// { ['Esc', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Blackspace'].map((element) => <div>{element}</div>) }
-// { ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\'', 'Del'].map((element) => <div>{element}</div>) }
-// { ['Caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '', '', '', '', ''].map((element) => <div>{element}</div>) }
-// { ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '', '', '', '', '', '', '', '', ''].map((element) => <div>{element}</div>) }

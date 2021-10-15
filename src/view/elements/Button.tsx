@@ -1,11 +1,11 @@
 // Core
-import React, { FC, DetailedHTMLProps, Ref, ReactElement } from 'react';
+import React, { FC, DetailedHTMLProps, Ref, ReactNode } from 'react';
 import styled from 'styled-components';
 
 // Types
 interface PropTypes extends DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     ref?: Ref<HTMLButtonElement>;
-    children: ReactElement | string;
+    children: ReactNode;
     width?: string;
     padding?: string;
     variant?: string;

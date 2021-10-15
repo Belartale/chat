@@ -10,3 +10,8 @@ export const createMessageActionAsync: types.CreateMessageContract = (payload) =
     type: types.CREATE_MESSAGE_ASYNC,
     payload,
 });
+
+export const deleteMessageActionAsync: types.DeleteMessageContract = (payload) => ({
+    type: types.DELETE_MESSAGE_ASYNC,
+    payload,
+});

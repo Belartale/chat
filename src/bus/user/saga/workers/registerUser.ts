@@ -20,11 +20,10 @@ import { uesrActions } from '../../slice';
 export function* RegisterUser(action: RegisterUserActionAsync) {
     const result: User | null = yield makeRequest<User>({
         fetcher:           () => API.registerUser(action.payload),
-        togglerType:       'isRegisterUser',
         succesAction:      uesrActions.setUser,
-        successSideEffect: (result) => {
+        successSideEffect: function*(result) {
             if (result._id) {
-                userLocalStore.setRefreshToken(result._id);
+                yield userLocalStore.setRefreshToken(result._id);
             }
         },
     });
