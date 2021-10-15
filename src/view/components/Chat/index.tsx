@@ -83,14 +83,13 @@ export const Chat: FC = () => {
                                             {comparisonNames ? (
                                                 <ContainerCenter>
                                                     <Button
-                                                        variant = { 'submit primary' }
+                                                        variant =  'primary'
                                                         onClick = { () => deleteMessage(message._id) }>
                                                         Delete
                                                     </Button>
                                                     {/* <Button
                                                         style = {{ marginLeft: '5px' }}
-                                                        variant = { 'submit primary' }
-                                                        onClick = { () => setTogglerListenerAction({ type: 'isChangeMessage', value: message._id }) }>
+                                                        variant = 'primary'>
                                                         {togglersRedux.isChangeMessage === message._id ? 'Change' : 'Cancel'}
                                                     </Button> */}
                                                 </ContainerCenter>
@@ -131,7 +130,7 @@ export const Chat: FC = () => {
                             <Button
                                 disabled = { !isValidation }
                                 padding = '5px 10px'
-                                variant = {  'submit primary' }
+                                variant = 'primary'
                                 onClick = { onSubmitButton }>
                                 SEND
                             </Button>
@@ -139,7 +138,7 @@ export const Chat: FC = () => {
                                 mediaMaxWith = '490px'
                                 padding = '5px 10px'
                                 style = {{ marginLeft: '5px' }}
-                                variant = { 'submit primary' }
+                                variant = 'primary'
                                 onClick = { () => setTogglerListenerAction({ type: 'isKeyboard' }) }>
                                 Keyboard
                             </Button>

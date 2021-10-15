@@ -20,13 +20,13 @@ const Styled = styled.button<PropTypes>`
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
-    ${({ variant, theme }) => variant === 'submit primary' ? {
+    ${({ variant, theme }) => variant === 'primary' ? {
         border:       `1px solid ${theme.button.primary}`,
         [ ':hover' ]: {
             backgroundColor: theme.button.primary,
         },
     } : null}
-    ${({ variant, theme }) => variant === 'submit secondary' ? {
+    ${({ variant, theme }) => variant === 'secondary' ? {
         border:       `1px solid ${theme.button.secondary}`,
         [ ':hover' ]: {
             backgroundColor: theme.button.secondary,

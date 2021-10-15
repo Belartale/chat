@@ -27,7 +27,7 @@ const Chat: FC = () => {
                 <Button
                     padding = '5px 10px'
                     style = {{ marginLeft: '5px' }}
-                    variant = 'submit secondary'
+                    variant = 'secondary'
                     onClick = { logoutUser }>Logout
                 </Button>
             </ContainerCenter>

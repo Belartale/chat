@@ -52,16 +52,17 @@ export const useInputMessageRedux = () => {
     const setInputMessageKeyboard = (payload: string) => {
         if (
             payload !== 'Backspace'
-            && payload !== 'Escape'
-            && payload !== 'Calps'
             && payload !== 'Shift'
-            && payload !== 'Control'
-            && payload !== 'Win'
-            && payload !== 'Shift'
+            && payload !== 'Space'
+            && payload !== 'En'
+            && payload !== 'Ру'
         ) {
             dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.inputChatMessage + payload));
         } else if (payload === 'Backspace') {
             dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.inputChatMessage.slice(0, -1)));
+        }
+        if (payload === 'Space') {
+            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.inputChatMessage + ' '));
         }
     };
 

@@ -39,7 +39,7 @@ export const FormRegister: FC = () => {
                     <Button
                         padding = '5px 10px'
                         type = 'submit'
-                        variant = 'submit primary'
+                        variant = 'primary'
                         onClick = { () => registerUser(form) }>INTRO HOLE
                     </Button>
                 </ContainerCenter>
