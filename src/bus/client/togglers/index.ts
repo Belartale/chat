@@ -10,6 +10,8 @@ const initialState = {
     isMessagesFetching: false,
     isRefreshUser:      false,
     isKeyboard:         false,
+    isKeyboardEnglish:  true,
+    isKeyboardCapsLock: false,
     isLoggedIn:         false,
 };
 
