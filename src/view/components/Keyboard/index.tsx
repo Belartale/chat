@@ -27,30 +27,6 @@ type showLetterPropTypes = {
 export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
     const { setInputMessageKeyboardRedux } = useInputMessageRedux();
     const { isToggle, handleToggle } = useToggleUseState();
-
-    // const [ arrayState, setArray ] = useState([ '1' ]);
-
-    // const eventKeydown = (event: any) => {
-    //     if (!arrayState.includes(event.key)) {
-    //         setArray(event.key);
-    //         console.log('some text');
-    //     }
-    // };
-
-    // const eventKeyup = (event: any) => {
-    //     console.log(arrayState);
-    // };
-    // useLayoutEffect(() => {
-    //     document.addEventListener('keydown', eventKeydown); // нажать
-    //     document.addEventListener('keyup', eventKeyup); // отпустить
-
-
-    //     return () => {
-    //         document.removeEventListener('keydown', eventKeydown);
-    //         document.removeEventListener('keyup', eventKeyup);
-    //     };
-    // }, []);
-
     const [ isKeyboardEnglish, setIsKeyboardEnglish ] = useState(true);
 
 
@@ -78,7 +54,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
         let choose: string | null = isKeyboardEnglish === true ? element.keyEnValue : element.keyRuValue;
 
         const chooseToLocaleUpperCase = (value: string) => {
-            if (value !== 'Shift' && value !== 'Backspace' && value !== 'Space' && value !== 'Enter') {
+            if (value !== 'Shift' && value !== 'Backspace' && value !== 'Space' && value !== 'Enter' && value !== 'En' && value !== 'Ру') {
                 return value.toLocaleUpperCase();
             }
 

@@ -1,6 +1,5 @@
-// Tools
-import { ControlledError } from '../../../../tools/utils';
-import { API_URL } from '../../../../init/constants';
+// Constants
+import { API_URL } from '../../../../init';
 
 // Types
 import { CreateMessageContract } from './types';
@@ -15,10 +14,7 @@ export const createMessage: CreateMessageContract = async (message) => {
     });
 
     if (response.status !== 201) {
-        throw new ControlledError({
-            message:    'createMessage failed',
-            statusCode: response.status,
-        });
+        throw new Error(`createMessage failed ${response.status}`);
     }
 
     return response.json();

@@ -1,6 +1,5 @@
-// Tools
-import { ControlledError } from '../../../../tools/utils';
-import { API_URL } from '../../../../init/constants';
+// Constants
+import { API_URL } from '../../../../init';
 
 // Types
 import { DeleteMessageContract } from './types';
@@ -14,10 +13,7 @@ export const deleteMessage: DeleteMessageContract = async (id) => {
     });
 
     if (response.status !== 200) {
-        throw new ControlledError({
-            message:    'deleteMessage failed',
-            statusCode: response.status,
-        });
+        throw new Error(`deleteMessage failed ${response.status}`);
     }
 
     return response.json();

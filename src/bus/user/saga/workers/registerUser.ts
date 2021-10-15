@@ -4,18 +4,18 @@ import { put } from 'redux-saga/effects';
 // Bus
 import { togglerCreatorAction } from '../../../client/togglers';
 
-// Types
-import { User } from '../../types';
-import { RegisterUserActionAsync } from '../types';
-
-// Tools
+// Utils
 import { makeRequest, userLocalStore } from '../../../../tools/utils';
+
+// Actions
+import { uesrActions } from '../../slice';
 
 // API
 import * as API from '../api';
 
-// Actions
-import { uesrActions } from '../../slice';
+// Types
+import { User } from '../../types';
+import { RegisterUserActionAsync } from '../types';
 
 export function* RegisterUser(action: RegisterUserActionAsync) {
     const result: User | null = yield makeRequest<User>({

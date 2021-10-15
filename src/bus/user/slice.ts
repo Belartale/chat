@@ -1,11 +1,11 @@
 // Core
 import { createSlice } from '@reduxjs/toolkit';
 
-// Types
-import { UserState } from './types';
-
 // Reducers
 import * as reducers from './reducers';
+
+// Types
+import { UserState } from './types';
 
 export const initialState: UserState = {
     _id:      null,

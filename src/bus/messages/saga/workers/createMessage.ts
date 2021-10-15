@@ -1,19 +1,17 @@
 // Core
 import { put } from 'redux-saga/effects';
 
-// Types
-import { MessageUser } from '../../types';
-
 // Actions
 import { fetchMessagesActionAsync } from '../actions';
+
+// Utils
+import { makeRequest } from '../../../../tools/utils';
 
 // Api
 import * as API from '../api';
 
-// Tools
-import { makeRequest } from '../../../../tools/utils';
-
 // Types
+import { MessageUser } from '../../types';
 import * as types from '../types';
 
 export function* createMessage({ payload }: types.CreateMessageActionAsync) {

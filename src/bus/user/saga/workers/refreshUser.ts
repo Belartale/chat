@@ -1,9 +1,8 @@
 // Core
 import { put } from 'redux-saga/effects';
 
-// Types
-import { User } from '../../types';
-import { RefreshUserActionAsync } from '../types';
+// Utils
+import { makeRequest, userLocalStore } from '../../../../tools/utils';
 
 // Actions
 import { uesrActions } from '../../slice';
@@ -12,8 +11,9 @@ import { togglerCreatorAction } from '../../../client/togglers';
 // API
 import * as API from '../api';
 
-// Utils
-import { makeRequest, userLocalStore } from '../../../../tools/utils';
+// Types
+import { User } from '../../types';
+import { RefreshUserActionAsync } from '../types';
 
 export function* refreshUser(action: RefreshUserActionAsync) {
     const result: User = yield makeRequest<User>({

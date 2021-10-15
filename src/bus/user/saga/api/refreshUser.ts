@@ -1,5 +1,4 @@
-// Tools
-import { ControlledError } from '../../../../tools/utils';
+// Constants
 import { API_URL } from '../../../../init';
 
 // Types
@@ -14,10 +13,7 @@ export const refreshUser: (id: string) => Promise<types.RefreshUser> = async (id
     });
 
     if (response.status !== 200) {
-        throw new ControlledError({
-            message:    'fetchMessages failed',
-            statusCode: response.status,
-        });
+        throw new Error(`fetchMessages failed ${response.status}`);
     }
 
     return response.json();

@@ -1,8 +1,6 @@
 // Core
 import styled from 'styled-components';
 
-export const KeyboardButton = styled.button``;
-
 // Types
 type GridContainerTypes = {
     template: string

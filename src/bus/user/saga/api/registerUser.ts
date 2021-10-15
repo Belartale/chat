@@ -1,5 +1,4 @@
-// Tools
-import { ControlledError } from '../../../../tools/utils';
+// Constants
 import { API_URL } from '../../../../init';
 
 // Types
@@ -15,10 +14,7 @@ export const registerUser: (userName: types.UserForm) => Promise<types.RegisterU
     });
 
     if (response.status !== 201) {
-        throw new ControlledError({
-            message:    'registerUser failed',
-            statusCode: response.status,
-        });
+        throw new Error(`registerUser failed ${response.status}`);
     }
 
     return response.json();

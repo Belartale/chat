@@ -1,11 +1,11 @@
 // Core
 import { createSlice } from '@reduxjs/toolkit';
 
-// Types
-import { MessagesState } from './types';
-
 // Reducers
 import * as reducers from './reducers';
+
+// Types
+import { MessagesState } from './types';
 
 const initialState: MessagesState = [];
 

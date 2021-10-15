@@ -1,6 +1,5 @@
-// Tools
-import { ControlledError } from '../../../../tools/utils';
-import { API_URL } from '../../../../init/constants';
+// Constants
+import { API_URL } from '../../../../init';
 
 // Types
 import { FetchMessagesContract } from './types';
@@ -14,10 +13,7 @@ export const fetchMessages: FetchMessagesContract = async () => {
     });
 
     if (response.status !== 200) {
-        throw new ControlledError({
-            message:    'fetchMessages failed',
-            statusCode: response.status,
-        });
+        throw new Error(`fetchMessages failed ${response.status}`);
     }
 
     return response.json();
