@@ -9,7 +9,6 @@ const initialState = {
     isOnline:           navigator.onLine,
     isMessagesFetching: false,
     isRefreshUser:      false,
-    isChangeMessage:    null,
     isKeyboard:         false,
     isLoggedIn:         false,
 };
@@ -17,7 +16,7 @@ const initialState = {
 // Types
 export type TogglersKeys = keyof typeof initialState;
 type Options = { type: TogglersKeys, value: boolean | string | null };
-type OptionsTogglerListener = { type: Options['type'], value?: Options['value'] };
+type OptionsTogglerListener = { type: Options['type'] };
 
 // Slice
 export const toggrersSlice = createSlice({
@@ -41,17 +40,15 @@ export const useTogglersRedux = () => {
     const dispatch = useDispatch();
 
     const setTogglerListener = (options: OptionsTogglerListener) => {
-        if (typeof options.value === 'string') {
-            togglers[ options.type ] ? dispatch(
-                toggrersActions.togglerCreatorAction(
-                    { type: options.type, value: null },
-                ),
-            ) : dispatch(
-                toggrersActions.togglerCreatorAction(
-                    { type: options.type, value: options.value },
-                ),
-            );
-        }
+        togglers[ options.type ] !== false ? dispatch(
+            toggrersActions.togglerCreatorAction(
+                { type: options.type, value: false },
+            ),
+        ) : dispatch(
+            toggrersActions.togglerCreatorAction(
+                { type: options.type, value: true },
+            ),
+        );
     };
 
     return {
