@@ -7,6 +7,7 @@ import errors from '../../bus/client/errors';
 import user from '../../bus/user/slice';
 import messages from '../../bus/messages/slice';
 import inputMessage from '../../bus/client/inputMessageKey';
+import backlitKeyboard from '../../bus/client/backlitKeyboard';
 
 // Middleware
 import { middleware, sagaMiddleware } from './middleware';
@@ -21,6 +22,7 @@ export const store = configureStore({
         messages,
         user,
         inputMessage,
+        backlitKeyboard,
     },
     middleware,
     devTools: process.env.NODE_ENV !== 'production',

@@ -10,6 +10,7 @@ interface PropTypes extends DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLBut
     padding?: string;
     variant?: string;
     mediaMaxWith?: string;
+    style?: object;
 }
 
 // Styles

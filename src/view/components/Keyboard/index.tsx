@@ -1,5 +1,6 @@
 // Core
-import React, { FC } from 'react';
+import React, { FC, useLayoutEffect } from 'react';
+import { useBacklitKeyboardRedux } from '../../../bus/client/backlitKeyboard';
 
 // Bus
 import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
@@ -31,6 +32,24 @@ type showLetterPropTypes = {
 export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
     const { setInputMessageKeyboardRedux } = useInputMessageRedux();
     const { togglersRedux, setTogglerAction, setTogglerListenerAction } = useTogglersRedux();
+
+
+    const {
+        backlitKeyboardsRedux,
+        setBacklitKeyboardActionRedux,
+        deleteBacklitKeyboardActionRedux,
+    } = useBacklitKeyboardRedux();
+    useLayoutEffect(() => {
+        console.log('useEffect');
+        document.addEventListener('keydown', (event) => setBacklitKeyboardActionRedux(event.key));
+        document.addEventListener('keyup', (event) => deleteBacklitKeyboardActionRedux(event.key));
+
+        return () => {
+            document.addEventListener('keydown', () => void 0);
+            document.addEventListener('keyup', () => void 0);
+        };
+    }, []);
+
 
     const keyboardHandler = (event: any) => {
         const btn = event.target as HTMLElement;
@@ -66,6 +85,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
         return choose !== null ? (
             <Button
                 key = { element.keyCode !== null ? element.keyCode : element.keyEnValue }
+                style = { backlitKeyboardsRedux.some((elementRedux) => elementRedux === element.keyCode) ? { backgroundColor: 'red' } : {} }
                 variant = 'primary'>
                 {isToggle === true
                     ? chooseToLocaleUpperCase(choose)
