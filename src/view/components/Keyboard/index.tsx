@@ -75,9 +75,9 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
     };
 
     return (
-        <Card>
-            <div onClick = { keyboardHandler }>
-                <Container>
+        <Container>
+            <Card>
+                <div onClick = { keyboardHandler }>
                     {keysDataArray.map((line, index) => (
                         <GridContainer
                             key = { index }
@@ -94,8 +94,8 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                             { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
                         ))}
                     </GridContainer>
-                </Container>
-            </div>
-        </Card>
+                </div>
+            </Card>
+        </Container>
     );
 };
