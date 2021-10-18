@@ -35,10 +35,7 @@ export const useUser = (options?: Options) => {
 
     useEffect(() => {
         if (options?.useEffectLocalStore) {
-            if (
-                userLocalStore.getRefreshToken() === 'undefined'
-            || userLocalStore.getRefreshToken().length > 0
-            ) {
+            if (userLocalStore.getRefreshToken()) {
                 dispatch(RefreshUserActionAsync(userLocalStore.getRefreshToken()));
             }
         }
