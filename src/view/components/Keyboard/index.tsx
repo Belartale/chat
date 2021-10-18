@@ -5,6 +5,7 @@ import React, { FC } from 'react';
 import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
 import { useTogglersRedux } from '../../../bus/client/togglers';
 
+// Utils
 import { keysData } from '../../../tools/utils/keysData';
 
 // Elements
@@ -33,7 +34,6 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
 
     const keyboardHandler = (event: any) => {
         const btn = event.target as HTMLElement;
-        console.log(btn.textContent);
         if (btn.textContent === 'Enter') {
             onSubmitButton();
         } else {
@@ -64,7 +64,9 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
         };
 
         return choose !== null ? (
-            <Button variant = 'primary'>
+            <Button
+                key = { element.keyCode }
+                variant = 'primary'>
                 {isToggle === true
                     ? chooseToLocaleUpperCase(choose)
                     : choose}
