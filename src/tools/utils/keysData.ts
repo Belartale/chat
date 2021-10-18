@@ -1,5 +1,11 @@
 type NPD = Array<[string | null, string | null, string | null]>
 
+export type oneLetter = {
+    keyEnValue: string
+    keyRuValue: string
+    keyCode: string | null;
+}
+
 const transformer = (arrayOfData: NPD) => arrayOfData.map(([ keyRuValue, keyEnValue, keyCode ]) => ({
     keyRuValue, keyEnValue, keyCode,
 }));
@@ -17,5 +23,12 @@ export const keysData = {
     forthLine:  transformer(forthLine),
     fifthLine:  transformer(fifthLine),
 };
+
+export const keysDataArray = [
+    transformer(firstLine),
+    transformer(secondLine),
+    transformer(thirdLine),
+    transformer(forthLine),
+];
 
 export type IParsedKeys = ReturnType<typeof transformer>

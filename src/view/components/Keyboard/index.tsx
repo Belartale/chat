@@ -6,7 +6,7 @@ import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
 import { useTogglersRedux } from '../../../bus/client/togglers';
 
 // Utils
-import { keysData } from '../../../tools/utils/keysData';
+import { keysData, keysDataArray } from '../../../tools/utils/keysData';
 
 // Elements
 import { Button, Card } from '../../elements';
@@ -65,7 +65,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
 
         return choose !== null ? (
             <Button
-                key = { element.keyCode }
+                key = { element.keyCode !== null ? element.keyCode : element.keyEnValue }
                 variant = 'primary'>
                 {isToggle === true
                     ? chooseToLocaleUpperCase(choose)
@@ -78,26 +78,17 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
         <Card>
             <div onClick = { keyboardHandler }>
                 <Container>
-                    <GridContainer template = { `repeat(${togglersRedux.isKeyboardEnglish === true ? 10 : 10 }, 1fr)` }>
-                        {keysData.firstLine.map((element) => showLetter(
-                            { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
-                        ))}
-                    </GridContainer>
-                    <GridContainer template = { `repeat(${togglersRedux.isKeyboardEnglish === true ? 10 : 11}, 1fr)` }>
-                        {keysData.secondLine.map((element) => showLetter(
-                            { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
-                        ))}
-                    </GridContainer>
-                    <GridContainer template = { `repeat(${togglersRedux.isKeyboardEnglish === true ? 9 : 11}, 1fr)` }>
-                        {keysData.thirdLine.map((element) => showLetter(
-                            { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
-                        ))}
-                    </GridContainer>
-                    <GridContainer template = { `repeat(${togglersRedux.isKeyboardEnglish === true ? 9 : 11}, 1fr)` }>
-                        {keysData.forthLine.map((element) => showLetter(
-                            { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
-                        ))}
-                    </GridContainer>
+                    {keysDataArray.map((line, index) => (
+                        <GridContainer
+                            key = { index }
+                            template = { `repeat(${line.filter((oneLetter) => togglersRedux.isKeyboardEnglish
+                                ? oneLetter.keyEnValue !== null
+                                : oneLetter.keyRuValue !== null).length}, 1fr)` }>
+                            {line.map((element) => showLetter(
+                                { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
+                            ))}
+                        </GridContainer>
+                    ))}
                     <GridContainer template = 'repeat(2, 1fr) 50% 1fr 10%'>
                         {keysData.fifthLine.map((element) => showLetter(
                             { element: element, isToggle: togglersRedux.isKeyboardCapsLock },

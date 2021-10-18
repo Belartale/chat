@@ -4,7 +4,6 @@ import { v4 } from 'uuid';
 
 // Bus
 import { useUser } from '../../../bus/user';
-import { UserForm } from '../../../bus/user/types';
 
 // Hooks
 import { useForm } from '../../../tools/hooks';
@@ -18,10 +17,12 @@ import { Button, Card, Input } from '../../elements';
 // Container
 import { ContainerCenter } from '../../container';
 
+// Types
+import { UserForm } from '../../../bus/user/types';
+
 const Register: FC = () => {
     const [ form, handleChange ] = useForm<UserForm>({ username: `RAT:${v4().slice(0, 5)}` });
     const { registerUser } = useUser();
-
 
     return (
         <ContainerCenter fullHeight>

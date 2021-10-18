@@ -16,7 +16,6 @@ import { Button, ShowUserName } from '../../elements';
 const Chat: FC = () => {
     const { logoutUser } = useUser();
 
-
     return (
         <ContainerCenter
             fullHeight
