@@ -10,6 +10,7 @@ interface PropTypes extends AriaAttributes {}
 
 // Styles
 const Styled = styled.div<PropTypes>`
+color: ${({ theme }) => theme.text.textStandard};
 `;
 
 export const ShowUserName: FC<PropTypes> = ({ ...otherProps }) => {

@@ -11,6 +11,10 @@ interface PropTypes extends DetailedHTMLProps<React.InputHTMLAttributes<HTMLInpu
     containerWidth?: string;
 }
 
+interface LabelStyledTypes extends DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
+    color?: string;
+}
+
 interface ContainerProps {
     direction?: string;
     containerWidth?: string;
@@ -23,22 +27,36 @@ const Container = styled.div<ContainerProps>`
     ${ ({ direction }) => direction === 'column' ? { flexDirection: 'column' } : { flexDirection: 'row' }}
 `;
 
+const LabelStyled = styled.label<LabelStyledTypes>`
+    color: ${({ color, theme }) => color ? color : theme.text.textStandard};
+`;
+
 const InputStyled = styled.input<PropTypes>`
     width: 100%;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid ${({ color }) => color ? color : 'black'};
-    color: ${({ color }) => color ? color : 'black'};
+    border-bottom: 1px solid ${({ color, theme }) => color ? color : theme.input.colorBorder};
+    color: ${({ color, theme }) => color ? color : theme.text.textStandard};
     ${ ({ direction }) => direction === 'column' ? { marginTop: '10px' } : { marginLeft: '10px' }}
 `;
 
-export const Input: FC<PropTypes> = ({ label, id, name, direction, containerWidth, ...otherProps }) => {
+export const Input: FC<PropTypes> = ({ label, id, name, direction, containerWidth, color, ...otherProps }) => {
     return (
         <Container
             containerWidth = { containerWidth }
             direction = { direction } >
-            {label ? <label htmlFor = { id || name }>{label}</label> : null}
+            {
+                label
+                    ? (
+                        <LabelStyled
+                            color = { color }
+                            htmlFor = { id || name }>{label}
+                        </LabelStyled>
+                    )
+                    : null
+            }
             <InputStyled
+                color = { color }
                 direction = { direction }
                 id = { id || name }
                 name = { name }

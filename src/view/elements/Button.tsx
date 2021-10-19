@@ -22,6 +22,7 @@ const Styled = styled.button<PropTypes>`
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
+    color: ${({ theme }) => theme.text.textStandard};
 
     ${({ variant, theme }) => variant === 'primary' ? {
         border:       `1px solid ${theme.button.primary}`,
@@ -38,7 +39,7 @@ const Styled = styled.button<PropTypes>`
     } : null}
 
     &:active {
-        background-color: ${({ theme }) => theme.button.active};
+        opacity: 0.7;
     }
 
     ${({ mediaMaxWith }) => mediaMaxWith ? {
@@ -47,7 +48,7 @@ const Styled = styled.button<PropTypes>`
         },
     } : null}
 
-    ${({ active, theme }) => active ? { backgroundColor: theme.button.active } : null}
+    ${({ active }) => active ? { opacity: 0.7 } : null}
 
     
 `;

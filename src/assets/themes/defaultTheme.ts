@@ -1,21 +1,26 @@
 export const defaultTheme = {
     name:   'defaultTheme',
     button: {
-        primary:   '#395afe',
-        secondary: '#ff3739',
-        active:    'gray',
+        primary:   '#5865f2',
+        secondary: '#b9bbbe',
     },
     backgroundPage: {
-        primary: '#f0efeb',
+        primary: '#202225',
     },
 
     card: {
-        primary: '#ffffff',
+        primary: '#2f3136',
     },
     message: {
-        messageBody:          '#395afe',
-        messageBodyIsOwner:   '#ff3739',
+        messageBody:          '#36393f',
+        messageBodyIsOwner:   '#3d3d3d',
         messageFont:          'white',
-        messageFontSecondary: '#ff3739',
+        messageFontSecondary: 'gray',
+    },
+    text: {
+        textStandard: 'white',
+    },
+    input: {
+        colorBorder: 'white',
     },
 };

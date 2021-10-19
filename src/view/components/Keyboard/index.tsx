@@ -70,7 +70,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
             return void 0;
         }
 
-        if (btn.textContent === 'Caps Lock') {
+        if (btn.textContent === 'CapsLock') {
             setTogglerListenerAction({ type: 'isKeyboardCapsLock' });
 
             return void 0;
@@ -91,7 +91,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
         const chooseToLocaleUpperCase = (value: string) => {
             if (
                 value !== 'Tab'
-                && value !== 'Caps Lock'
+                && value !== 'CapsLock'
                 && value !== 'Shift'
                 && value !== 'Backspace'
                 && value !== 'Space'
