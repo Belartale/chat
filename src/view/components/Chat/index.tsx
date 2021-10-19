@@ -167,7 +167,14 @@ export const Chat: FC = () => {
                     </form>
                 </ContainerStyled>
             </Card>
-            {togglersRedux.isKeyboard ? <Keyboard onSubmitButton = { onSubmitButton } /> : null}
+            {togglersRedux.isKeyboard
+                ? (
+                    <Keyboard
+                        isIdChangeMessage = { isIdChangeMessage }
+                        onChangeButton = { onChangeButton }
+                        onSubmitButton = { onSubmitButton }
+                    />
+                ) : null}
         </>
     );
 };

@@ -18,6 +18,8 @@ import { Container, GridContainer } from './styles';
 // Types
 interface KeyboardTypes {
     onSubmitButton: Function
+    isIdChangeMessage: string | boolean
+    onChangeButton: Function
 }
 
 type showLetterPropTypes = {
@@ -29,7 +31,7 @@ type showLetterPropTypes = {
     isToggle: boolean
 };
 
-export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
+export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton, isIdChangeMessage, onChangeButton }) => {
     const { setInputMessageKeyboardRedux } = useInputMessageRedux();
     const { togglersRedux, setTogglerAction, setTogglerListenerAction } = useTogglersRedux();
 
@@ -54,7 +56,11 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
     const keyboardHandler = (event: any) => {
         const btn = event.target as HTMLElement;
         if (btn.textContent === 'Enter') {
-            onSubmitButton();
+            if (isIdChangeMessage) {
+                onChangeButton();
+            } else {
+                onSubmitButton();
+            }
 
             return void 0;
         }
