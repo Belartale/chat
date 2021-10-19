@@ -13,12 +13,12 @@ export const backlitKeyboardSlice = createSlice({
     initialState,
     reducers: {
         setBacklitKeyboardCreatorAction: (state, action: PayloadAction<string>) => {
-            let arr = [ ...state, action.payload ];
-
-            return Array.from(new Set(arr));
+            if (!state.includes(action.payload)) {
+                state.push(action.payload);
+            }
         },
         deletebacklitKeyboardCreatorAction: (state, action: PayloadAction<string>) => {
-            let item = state.indexOf(action.payload);
+            const item = state.indexOf(action.payload);
 
             state.splice(item, 1);
         },
@@ -30,16 +30,16 @@ const backlitKeyboardActions = backlitKeyboardSlice.actions;
 export default backlitKeyboardSlice.reducer;
 
 export const useBacklitKeyboardRedux = () => {
-    const backlitKeyboard = useSelector(({ backlitKeyboard }) => backlitKeyboard); //
+    const backlitKeyboard = useSelector(({ backlitKeyboard }) => backlitKeyboard);
     const dispatch = useDispatch();
 
     return {
         backlitKeyboardsRedux:         backlitKeyboard,
         setBacklitKeyboardActionRedux: (key: string) => dispatch(
-            backlitKeyboardActions.setBacklitKeyboardCreatorAction(key), // w
+            backlitKeyboardActions.setBacklitKeyboardCreatorAction(key),
         ),
         deleteBacklitKeyboardActionRedux: (key: string) => dispatch(
-            backlitKeyboardActions.deletebacklitKeyboardCreatorAction(key), // w
+            backlitKeyboardActions.deletebacklitKeyboardCreatorAction(key),
         ),
     };
 };
