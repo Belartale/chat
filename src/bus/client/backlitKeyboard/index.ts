@@ -5,19 +5,19 @@ import { useDispatch } from 'react-redux';
 // Tools
 import { useSelector } from '../../../tools/hooks';
 
-const initialState: Array<string> | null = [];
+const initialState: Array<number> | null = [];
 
 // Slice
 export const backlitKeyboardSlice = createSlice({
     name:     'backlitKeyboard',
     initialState,
     reducers: {
-        setBacklitKeyboardCreatorAction: (state, action: PayloadAction<string>) => {
+        setBacklitKeyboardCreatorAction: (state, action: PayloadAction<number>) => {
             if (!state.includes(action.payload)) {
                 state.push(action.payload);
             }
         },
-        deletebacklitKeyboardCreatorAction: (state, action: PayloadAction<string>) => {
+        deletebacklitKeyboardCreatorAction: (state, action: PayloadAction<number>) => {
             const item = state.indexOf(action.payload);
 
             state.splice(item, 1);
@@ -35,10 +35,10 @@ export const useBacklitKeyboardRedux = () => {
 
     return {
         backlitKeyboardsRedux:         backlitKeyboard,
-        setBacklitKeyboardActionRedux: (key: string) => dispatch(
+        setBacklitKeyboardActionRedux: (key: number) => dispatch(
             backlitKeyboardActions.setBacklitKeyboardCreatorAction(key),
         ),
-        deleteBacklitKeyboardActionRedux: (key: string) => dispatch(
+        deleteBacklitKeyboardActionRedux: (key: number) => dispatch(
             backlitKeyboardActions.deletebacklitKeyboardCreatorAction(key),
         ),
     };

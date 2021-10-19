@@ -22,9 +22,9 @@ interface KeyboardTypes {
 
 type showLetterPropTypes = {
     element: {
-        keyRuValue: string | null;
-        keyEnValue: string | null;
-        keyCode: string | null;
+        keyRuValue: string;
+        keyEnValue: string;
+        keyCode: number;
     }
     isToggle: boolean
 };
@@ -41,8 +41,13 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
     } = useBacklitKeyboardRedux();
 
     useEffect(() => {
-        document.addEventListener('keydown', (event) => setBacklitKeyboardActionRedux(event.key));
-        document.addEventListener('keyup', (event) => deleteBacklitKeyboardActionRedux(event.key));
+        document.addEventListener('keydown', (event) => setBacklitKeyboardActionRedux(event.keyCode));
+        document.addEventListener('keyup', (event) => deleteBacklitKeyboardActionRedux(event.keyCode));
+
+        return () => {
+            document.addEventListener('keydown', () => void 0);
+            document.addEventListener('keyup', () => void 0);
+        };
     }, []);
 
 
@@ -67,6 +72,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
     };
 
     const showLetter = ({ element, isToggle }: showLetterPropTypes) => {
+        // let choose: number = element.keyCode;
         let choose: string | null = togglersRedux.isKeyboardEnglish === true ? element.keyEnValue : element.keyRuValue;
 
         const chooseToLocaleUpperCase = (value: string) => {
@@ -79,8 +85,8 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
 
         return choose !== null ? (
             <Button
-                active = { backlitKeyboardsRedux.includes(choose) }
-                key = { togglersRedux.isKeyboardEnglish ? element.keyEnValue : element.keyRuValue }
+                active = { backlitKeyboardsRedux.includes(element.keyCode) }
+                key = { element.keyCode }
                 variant = 'primary'>
                 {isToggle === true
                     ? chooseToLocaleUpperCase(choose)
@@ -104,7 +110,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                             ))}
                         </GridContainer>
                     ))}
-                    <GridContainer template = 'repeat(2, 1fr) 50% 1fr 10%'>
+                    <GridContainer template = '1fr 50% repeat(2, 1fr)'>
                         {keysData.fifthLine.map((element) => showLetter(
                             { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
                         ))}
