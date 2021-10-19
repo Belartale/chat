@@ -1,7 +1,6 @@
 // Core
 import React, { FC, DetailedHTMLProps, Ref, ReactNode } from 'react';
 import styled from 'styled-components';
-import { useBacklitKeyboardRedux } from '../../bus/client/backlitKeyboard';
 
 // Types
 interface PropTypes extends DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
@@ -53,9 +52,10 @@ const Styled = styled.button<PropTypes>`
     
 `;
 
-export const Button: FC<PropTypes> = ({ children, ...otherProps }) => {
+export const Button: FC<PropTypes> = ({ style, children, ...otherProps }) => {
     return (
         <Styled
+            style = { style }
             { ...otherProps }>
             {children}
         </Styled>

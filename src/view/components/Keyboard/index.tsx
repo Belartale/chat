@@ -55,28 +55,50 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
         const btn = event.target as HTMLElement;
         if (btn.textContent === 'Enter') {
             onSubmitButton();
-        } else {
-            btn.textContent && setInputMessageKeyboardRedux(btn.textContent);
+
+            return void 0;
         }
 
         if (btn.textContent === 'En') {
             setTogglerAction({ type: 'isKeyboardEnglish', value: false });
+
+            return void 0;
         }
         if (btn.textContent === 'Ру') {
             setTogglerAction({ type: 'isKeyboardEnglish', value: true });
+
+            return void 0;
+        }
+
+        if (btn.textContent === 'Caps Lock') {
+            setTogglerListenerAction({ type: 'isKeyboardCapsLock' });
+
+            return void 0;
         }
 
         if (btn.textContent === 'Shift') {
-            setTogglerListenerAction({ type: 'isKeyboardCapsLock' });
+            return void 0;
         }
+
+        btn.textContent && setInputMessageKeyboardRedux(btn.textContent);
+
+        return void 0;
     };
 
     const showLetter = ({ element, isToggle }: showLetterPropTypes) => {
-        // let choose: number = element.keyCode;
         let choose: string | null = togglersRedux.isKeyboardEnglish === true ? element.keyEnValue : element.keyRuValue;
 
         const chooseToLocaleUpperCase = (value: string) => {
-            if (value !== 'Shift' && value !== 'Backspace' && value !== 'Space' && value !== 'Enter' && value !== 'En' && value !== 'Ру') {
+            if (
+                value !== 'Tab'
+                && value !== 'Caps Lock'
+                && value !== 'Shift'
+                && value !== 'Backspace'
+                && value !== 'Space'
+                && value !== 'Enter'
+                && value !== 'En'
+                && value !== 'Ру'
+            ) {
                 return value.toLocaleUpperCase();
             }
 
@@ -110,7 +132,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton }) => {
                             ))}
                         </GridContainer>
                     ))}
-                    <GridContainer template = '1fr 50% repeat(2, 1fr)'>
+                    <GridContainer template = '1fr 2fr 1fr'>
                         {keysData.fifthLine.map((element) => showLetter(
                             { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
                         ))}

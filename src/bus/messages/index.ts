@@ -29,5 +29,6 @@ export const useMessages = () => {
         messages,
         createMessage: (payload: types.MessageUser) => void dispatch(actionAsync.createMessageActionAsync(payload)),
         deleteMessage: (payload: string) => void dispatch(actionAsync.deleteMessageActionAsync(payload)),
+        changeMessage: (payload: types.ChangeMessage) => void dispatch(actionAsync.changeMessageActionAsync(payload)),
     };
 };

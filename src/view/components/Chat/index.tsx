@@ -1,5 +1,5 @@
 // Core
-import React, { ChangeEvent, FC, useRef } from 'react';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
 
 // Bus
 import { useUser } from '../../../bus/user';
@@ -41,23 +41,35 @@ export const Chat: FC = () => {
     const { togglersRedux, setTogglerListenerAction } = useTogglersRedux();
 
     const { user, scrollWindowChat } = useUser({ scrollWindowChatCurrent: refWindowChat.current });
-    const { messages, createMessage, deleteMessage } = useMessages();
+    const { messages, createMessage, deleteMessage, changeMessage } = useMessages();
     const {
         inputMessageRedux,
         setInputMessageRedux,
     } = useInputMessageRedux();
-    const { isValidation, handleValidation } = useValidation(inputMessageRedux.inputChatMessage);
+    const { isValidation, handleValidation } = useValidation(inputMessageRedux);
+
+    const [ isIdChangeMessage, setIsIdChangeMessage ] = useState<boolean | string>(false);
 
     const onSubmitButton = () => {
-        createMessage({ text: inputMessageRedux.inputChatMessage, username: user.username });
+        createMessage({ text: inputMessageRedux, username: user.username });
         setInputMessageRedux('');
         handleValidation(null);
         scrollWindowChat(refWindowChat.current);
     };
 
+    const onChangeButton = () => {
+        if (typeof isIdChangeMessage === 'string') {
+            changeMessage({ _id: isIdChangeMessage, text: inputMessageRedux });
+            setIsIdChangeMessage(false);
+            setInputMessageRedux('');
+            handleValidation(null);
+            scrollWindowChat(refWindowChat.current);
+        }
+    };
+
     const onHandleInput = (event: ChangeEvent<HTMLInputElement>) => {
         setInputMessageRedux(event.target.value);
-        handleValidation(inputMessageRedux.inputChatMessage);
+        handleValidation(inputMessageRedux);
     };
 
     return (
@@ -84,8 +96,21 @@ export const Chat: FC = () => {
                                                 <ContainerCenter>
                                                     <Button
                                                         variant =  'primary'
-                                                        onClick = { () => deleteMessage(message._id) }>
+                                                        onClick = { () => {
+                                                            setIsIdChangeMessage(false);
+                                                            setInputMessageRedux('');
+                                                            deleteMessage(message._id);
+                                                        } }>
                                                         Delete
+                                                    </Button>
+                                                    <Button
+                                                        style = {{ marginLeft: '10px' }}
+                                                        variant = 'primary'
+                                                        onClick = { () => {
+                                                            setIsIdChangeMessage(message._id);
+                                                            setInputMessageRedux(message.text);
+                                                        } }>
+                                                        Change
                                                     </Button>
                                                 </ContainerCenter>
                                             ) : null}
@@ -119,15 +144,15 @@ export const Chat: FC = () => {
                                 name = 'text'
                                 style = {{ marginRight: '20px' }}
                                 type = 'text'
-                                value = { inputMessageRedux.inputChatMessage }
+                                value = { inputMessageRedux }
                                 onChange = { (event) => onHandleInput(event) }
                             />
                             <Button
                                 disabled = { !isValidation }
                                 padding = '5px 10px'
                                 variant = 'primary'
-                                onClick = { onSubmitButton }>
-                                SEND
+                                onClick = { isIdChangeMessage ? onChangeButton : onSubmitButton }>
+                                {isIdChangeMessage ? 'CHANGE' : 'SEND'}
                             </Button>
                             <Button
                                 mediaMaxWith = '490px'

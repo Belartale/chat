@@ -5,18 +5,10 @@ import { useDispatch } from 'react-redux';
 // Tools
 import { useSelector } from '../../../tools/hooks';
 
-const initialState = {
-    onFocus:                null,
-    inputChatMessage:       '',
-    inputChatMessageChange: '', // для фазы 2 (Опционально), Edit
-};
+const initialState = '';
 
 // Types
-export type InputMessageTypes = {
-    onFocus?:                string | null,
-    inputChatMessage?:       string,
-    inputChatMessageChange?: string,
-};
+export type InputMessageTypes = string;
 // type SetInputMessageType = typeof initialState;
 
 // Slice
@@ -24,20 +16,10 @@ export const inputMessageSlice = createSlice({
     name:     'inputMessage',
     initialState,
     reducers: {
-        setOnFocusForInputMessageCreatorAction: (
-            state: InputMessageTypes,
-            action: PayloadAction<string>,
-        ) => { state.onFocus = action.payload; },
-
         setInputMessageCreatorAction: (
             state: InputMessageTypes,
             action: PayloadAction<string>,
-        ) => { state.inputChatMessage = action.payload; },
-
-        setInputChatMessageChangeCreatorAction: (
-            state: InputMessageTypes,
-            action: PayloadAction<string>,
-        ) => { state.inputChatMessageChange = action.payload; },
+        ) => action.payload,
     },
 });
 
@@ -50,20 +32,24 @@ export const useInputMessageRedux = () => {
     const dispatch = useDispatch();
 
     const setInputMessageKeyboard = (payload: string) => {
-        if (
-            payload !== 'Backspace'
-            && payload !== 'Shift'
-            && payload !== 'Space'
-            && payload !== 'En'
-            && payload !== 'Ру'
-        ) {
-            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.inputChatMessage + payload));
-        } else if (payload === 'Backspace') {
-            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.inputChatMessage.slice(0, -1)));
+        if (payload === 'Backspace') {
+            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.slice(0, -1)));
+
+            return void 0;
+        }
+        if (payload === 'Tab') {
+            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState + '   '));
+
+            return void 0;
         }
         if (payload === 'Space') {
-            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState.inputChatMessage + ' '));
+            dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState + ' '));
+
+            return void 0;
         }
+        dispatch(inputMessageActions.setInputMessageCreatorAction(inputMessageState + payload));
+
+        return void 0;
     };
 
     const setInputMessage = (payload: string) => {
@@ -71,11 +57,8 @@ export const useInputMessageRedux = () => {
     };
 
     return {
-        inputMessageRedux:              inputMessageState,
-        setInputMessageRedux:           (payload: string) => void setInputMessage(payload),
-        setInputMessageKeyboardRedux:   (payload: string) => void setInputMessageKeyboard(payload),
-        setOnFocusForInputMessageRedux: (payload: string) => void dispatch(
-            inputMessageActions.setOnFocusForInputMessageCreatorAction(payload),
-        ),
+        inputMessageRedux:            inputMessageState,
+        setInputMessageRedux:         (payload: string) => void setInputMessage(payload),
+        setInputMessageKeyboardRedux: (payload: string) => void setInputMessageKeyboard(payload),
     };
 };

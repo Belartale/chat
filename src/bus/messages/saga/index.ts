@@ -10,6 +10,7 @@ import {
     fetchMessages,
     createMessage,
     deleteMessage,
+    changeMessage,
 } from './workers';
 
 function* watchFetchMessages(): SagaIterator {
@@ -24,6 +25,12 @@ function* watchDeleteMessage(): SagaIterator {
     yield takeEvery(types.DELETE_MESSAGE_ASYNC, deleteMessage);
 }
 
+function* watchChangeMessage(): SagaIterator {
+    yield takeEvery(types.CHANGE_MESSAGE_ASYNC, changeMessage);
+}
+
 export function* watchMessages(): SagaIterator {
-    yield all([ call(watchFetchMessages), call(watchCreateMessage), call(watchDeleteMessage) ]);
+    yield all(
+        [ call(watchFetchMessages), call(watchCreateMessage), call(watchDeleteMessage), call(watchChangeMessage) ],
+    );
 }

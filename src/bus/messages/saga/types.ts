@@ -22,3 +22,11 @@ export type DeleteMessageActionAsync = {
     payload: string
 };
 export type DeleteMessageContract = (payload: string) => DeleteMessageActionAsync
+
+// Types CHANGE
+export const CHANGE_MESSAGE_ASYNC = 'CHANGE_MESSAGE_ASYNC';
+export type ChangeMessageActionAsync = {
+    type: typeof CHANGE_MESSAGE_ASYNC;
+    payload:  types.ChangeMessage
+};
+export type ChangeMessageContract = (payload: types.ChangeMessage) => ChangeMessageActionAsync

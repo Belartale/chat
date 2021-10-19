@@ -16,5 +16,10 @@ export type MessageUser = {
     text: Message['text'] | null
 };
 
+export type ChangeMessage = {
+    _id: Message['_id']
+    text: Message['text']
+};
+
 // Contracts
 export type SetMessagesContract = CaseReducer<MessagesState, PayloadAction<MessagesState>>;
