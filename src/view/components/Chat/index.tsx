@@ -168,6 +168,7 @@ export const Chat: FC = () => {
                     ? (
                         <Keyboard
                             isIdChangeMessage = { isIdChangeMessage }
+                            isValidation = { isValidation }
                             onChangeButton = { onChangeButton }
                             onSubmitButton = { onSubmitButton }
                         />
