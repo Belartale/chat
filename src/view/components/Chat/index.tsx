@@ -73,108 +73,106 @@ export const Chat: FC = () => {
     };
 
     return (
-        <>
-            <Card
-                height = '75vh'
-                transformationWhen = '576px'
-                width = '500px'>
-                <ContainerStyled>
-                    <WindowChat ref = { refWindowChat }>
-                        {messages.map((message) => {
-                            let comparisonNames = user.username === message.username;
-                            let comparisonNamesFalse = user.username !== message.username;
+        <Card
+            height = '75vh'
+            transformationWhen = '576px'
+            width = '500px'>
+            <ContainerStyled>
+                <WindowChat ref = { refWindowChat }>
+                    {messages.map((message) => {
+                        let comparisonNames = user.username === message.username;
+                        let comparisonNamesFalse = user.username !== message.username;
 
-                            return (
-                                <Message
-                                    isOwner = { String(comparisonNames) }
-                                    key = { message._id }>
-                                    <MessageBody isOwner = { String(comparisonNames) }>
-                                        <ContainerCenter justifyContent = { comparisonNamesFalse ? 'space-between' : 'flex-end' }>
-                                            {comparisonNamesFalse
-                                                ? <MessageUserName>{message.username}</MessageUserName> : null}
-                                            {comparisonNames ? (
-                                                <ContainerCenter>
-                                                    <Button
-                                                        variant =  'primary'
-                                                        onClick = { () => {
-                                                            setIsIdChangeMessage(false);
-                                                            setInputMessageRedux('');
-                                                            deleteMessage(message._id);
-                                                        } }>
-                                                        Delete
-                                                    </Button>
-                                                    <Button
-                                                        style = {{ marginLeft: '10px' }}
-                                                        variant = 'primary'
-                                                        onClick = { () => {
-                                                            setIsIdChangeMessage(message._id);
-                                                            setInputMessageRedux(message.text);
-                                                        } }>
-                                                        Change
-                                                    </Button>
-                                                </ContainerCenter>
-                                            ) : null}
-                                        </ContainerCenter>
-                                        <MessageText>{message.text}</MessageText>
-                                        <MessageDetails direction = { String(message.createdAt === message.updatedAt) }>
-                                            {
-                                                message.createdAt === message.updatedAt
-                                                    ? null
-                                                    : (
-                                                        <MessageChanged>
-                                                            Changed
-                                                        </MessageChanged>
-                                                    )
-                                            }
-                                            <MessageDate>
-                                                {getSliceDate(message.createdAt)}
-                                            </MessageDate>
-                                        </MessageDetails>
-                                    </MessageBody>
-                                </Message>
-                            );
-                        }).reverse()
-                        }
-                    </WindowChat>
-                    <form onSubmit = { (event) => event.preventDefault() }>
-                        <ContainerCenter justifyContent = 'space-between'>
-                            <Input
-                                containerWidth = '100%'
-                                direction = 'row'
-                                name = 'text'
-                                style = {{ marginRight: '20px' }}
-                                type = 'text'
-                                value = { inputMessageRedux }
-                                onChange = { (event) => onHandleInput(event) }
-                            />
-                            <Button
-                                disabled = { !isValidation }
-                                padding = '5px 10px'
-                                variant = 'primary'
-                                onClick = { isIdChangeMessage ? onChangeButton : onSubmitButton }>
-                                {isIdChangeMessage ? 'CHANGE' : 'SEND'}
-                            </Button>
-                            <Button
-                                mediaMaxWith = '490px'
-                                padding = '5px 10px'
-                                style = {{ marginLeft: '5px' }}
-                                variant = 'primary'
-                                onClick = { () => setTogglerListenerAction({ type: 'isKeyboard' }) }>
-                                Keyboard
-                            </Button>
+                        return (
+                            <Message
+                                isOwner = { String(comparisonNames) }
+                                key = { message._id }>
+                                <MessageBody isOwner = { String(comparisonNames) }>
+                                    <ContainerCenter justifyContent = { comparisonNamesFalse ? 'space-between' : 'flex-end' }>
+                                        {comparisonNamesFalse
+                                            ? <MessageUserName>{message.username}</MessageUserName> : null}
+                                        {comparisonNames ? (
+                                            <ContainerCenter>
+                                                <Button
+                                                    variant =  'primary'
+                                                    onClick = { () => {
+                                                        setIsIdChangeMessage(false);
+                                                        setInputMessageRedux('');
+                                                        deleteMessage(message._id);
+                                                    } }>
+                                                    Delete
+                                                </Button>
+                                                <Button
+                                                    style = {{ marginLeft: '10px' }}
+                                                    variant = 'primary'
+                                                    onClick = { () => {
+                                                        setIsIdChangeMessage(message._id);
+                                                        setInputMessageRedux(message.text);
+                                                    } }>
+                                                    Change
+                                                </Button>
+                                            </ContainerCenter>
+                                        ) : null}
+                                    </ContainerCenter>
+                                    <MessageText>{message.text}</MessageText>
+                                    <MessageDetails direction = { String(message.createdAt === message.updatedAt) }>
+                                        {
+                                            message.createdAt === message.updatedAt
+                                                ? null
+                                                : (
+                                                    <MessageChanged>
+                                                        Changed
+                                                    </MessageChanged>
+                                                )
+                                        }
+                                        <MessageDate>
+                                            {getSliceDate(message.createdAt)}
+                                        </MessageDate>
+                                    </MessageDetails>
+                                </MessageBody>
+                            </Message>
+                        );
+                    }).reverse()
+                    }
+                </WindowChat>
+                <form onSubmit = { (event) => event.preventDefault() }>
+                    <ContainerCenter justifyContent = 'space-between'>
+                        <Input
+                            containerWidth = '100%'
+                            direction = 'row'
+                            name = 'text'
+                            style = {{ marginRight: '20px' }}
+                            type = 'text'
+                            value = { inputMessageRedux }
+                            onChange = { (event) => onHandleInput(event) }
+                        />
+                        <Button
+                            disabled = { !isValidation }
+                            padding = '5px 10px'
+                            variant = 'primary'
+                            onClick = { isIdChangeMessage ? onChangeButton : onSubmitButton }>
+                            {isIdChangeMessage ? 'CHANGE' : 'SEND'}
+                        </Button>
+                        <Button
+                            mediaMaxWith = '490px'
+                            padding = '5px 10px'
+                            style = {{ marginLeft: '5px' }}
+                            variant = 'primary'
+                            onClick = { () => setTogglerListenerAction({ type: 'isKeyboard' }) }>
+                            Keyboard
+                        </Button>
 
-                        </ContainerCenter>
-                    </form>
-                </ContainerStyled>
-            </Card>
-            {togglersRedux.isKeyboard
-                ? (
-                    <Keyboard
-                        isIdChangeMessage = { isIdChangeMessage }
-                        onChangeButton = { onChangeButton }
-                        onSubmitButton = { onSubmitButton }
-                    />
-                ) : null}
-        </>
+                    </ContainerCenter>
+                </form>
+                {togglersRedux.isKeyboard
+                    ? (
+                        <Keyboard
+                            isIdChangeMessage = { isIdChangeMessage }
+                            onChangeButton = { onChangeButton }
+                            onSubmitButton = { onSubmitButton }
+                        />
+                    ) : null}
+            </ContainerStyled>
+        </Card>
     );
 };

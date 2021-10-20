@@ -125,26 +125,24 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton, isIdChangeMessage,
 
     return (
         <Container>
-            <Card>
-                <div onClick = { keyboardHandler }>
-                    {keysDataArray.map((line, index) => (
-                        <GridContainer
-                            key = { index }
-                            template = { `repeat(${line.filter((oneLetter) => togglersRedux.isKeyboardEnglish
-                                ? oneLetter.keyEnValue !== null
-                                : oneLetter.keyRuValue !== null).length}, 1fr)` }>
-                            {line.map((element) => showLetter(
-                                { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
-                            ))}
-                        </GridContainer>
-                    ))}
-                    <GridContainer template = '1fr 2fr 1fr'>
-                        {keysData.fifthLine.map((element) => showLetter(
+            <div onClick = { keyboardHandler }>
+                {keysDataArray.map((line, index) => (
+                    <GridContainer
+                        key = { index }
+                        template = { `repeat(${line.filter((oneLetter) => togglersRedux.isKeyboardEnglish
+                            ? oneLetter.keyEnValue !== null
+                            : oneLetter.keyRuValue !== null).length}, 1fr)` }>
+                        {line.map((element) => showLetter(
                             { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
                         ))}
                     </GridContainer>
-                </div>
-            </Card>
+                ))}
+                <GridContainer template = '1fr 2fr 1fr'>
+                    {keysData.fifthLine.map((element) => showLetter(
+                        { element: element, isToggle: togglersRedux.isKeyboardCapsLock },
+                    ))}
+                </GridContainer>
+            </div>
         </Container>
     );
 };
