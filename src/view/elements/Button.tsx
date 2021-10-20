@@ -24,6 +24,10 @@ const Styled = styled.button<PropTypes>`
     cursor: pointer;
     color: ${({ theme }) => theme.text.textStandard};
 
+    &:active {
+        opacity: 0.5;
+    }
+
     ${({ variant, theme }) => variant === 'primary' ? {
         border:       `1px solid ${theme.button.primary}`,
         [ ':hover' ]: {
@@ -38,19 +42,14 @@ const Styled = styled.button<PropTypes>`
         },
     } : null}
 
-    &:active {
-        opacity: 0.7;
-    }
-
     ${({ mediaMaxWith }) => mediaMaxWith ? {
         [ `@media (max-width: ${mediaMaxWith})` ]: {
             display: 'none',
         },
     } : null}
 
-    ${({ active }) => active ? { opacity: 0.7 } : null}
-
-    
+    ${({ active }) => active ? { opacity: 0.5 } : null}
+    ${({ disabled }) => disabled ? { opacity: 0.5 } : null}
 `;
 
 export const Button: FC<PropTypes> = ({ style, children, ...otherProps }) => {

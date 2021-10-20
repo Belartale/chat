@@ -10,7 +10,7 @@ import { useTogglersRedux } from '../../../bus/client/togglers';
 import { keysData, keysDataArray } from '../../../tools/utils/keysData';
 
 // Elements
-import { Button, Card } from '../../elements';
+import { Button } from '../../elements';
 
 // Style
 import { Container, GridContainer } from './styles';

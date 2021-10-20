@@ -67,11 +67,11 @@ export const MessageDetails = styled.div<MessageDetailsTypes>`
 
 export const MessageChanged = styled.p`
     font-size: 12px;
-    color: ${({ theme }) => theme.message.messageFont};
+    color: ${({ theme }) => theme.message.messageFontSecondary};
 `;
 
 export const MessageDate = styled.p`
     font-size: 12px;
-    color: ${({ theme }) => theme.message.messageFont};
+    color: ${({ theme }) => theme.message.messageFontSecondary};
 `;
 
