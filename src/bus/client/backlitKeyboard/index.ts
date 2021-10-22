@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 // Tools
 import { useSelector } from '../../../tools/hooks';
 
-const initialState: Array<number> | null = [];
+const initialState: Array<number> = [];
 
 // Slice
 export const backlitKeyboardSlice = createSlice({
