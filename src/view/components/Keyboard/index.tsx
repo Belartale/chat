@@ -43,13 +43,16 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton, isIdChangeMessage,
         deleteBacklitKeyboardActionRedux,
     } = useBacklitKeyboardRedux();
 
+    const setBacklitKeyboard = (event: KeyboardEvent) => setBacklitKeyboardActionRedux(event.keyCode);
+    const deleteBacklitKeyboard = (event: KeyboardEvent) => deleteBacklitKeyboardActionRedux(event.keyCode);
+
     useEffect(() => {
-        document.addEventListener('keydown', (event) => setBacklitKeyboardActionRedux(event.keyCode));
-        document.addEventListener('keyup', (event) => deleteBacklitKeyboardActionRedux(event.keyCode));
+        document.addEventListener('keydown', setBacklitKeyboard);
+        document.addEventListener('keyup', deleteBacklitKeyboard);
 
         return () => {
-            document.addEventListener('keydown', () => void 0);
-            document.addEventListener('keyup', () => void 0);
+            document.removeEventListener('keydown', setBacklitKeyboard);
+            document.removeEventListener('keyup', deleteBacklitKeyboard);
         };
     }, []);
 
