@@ -5,6 +5,7 @@ import { useBacklitKeyboardRedux } from '../../../bus/client/backlitKeyboard';
 // Bus
 import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
 import { useTogglersRedux } from '../../../bus/client/togglers';
+import { GetKeys } from '../../../tools/utils/getKeys';
 
 // Utils
 import { keysData, keysDataArray } from '../../../tools/utils/keysData';
@@ -43,7 +44,13 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton, isIdChangeMessage,
         deleteBacklitKeyboardActionRedux,
     } = useBacklitKeyboardRedux();
 
-    const setBacklitKeyboard = (event: KeyboardEvent) => setBacklitKeyboardActionRedux(event.keyCode);
+    const setBacklitKeyboard = (event: KeyboardEvent) => {
+        let result = GetKeys.get();
+
+        if (result !== null && !result.includes(event.keyCode)) {
+            setBacklitKeyboardActionRedux(event.keyCode);
+        }
+    };
     const deleteBacklitKeyboard = (event: KeyboardEvent) => deleteBacklitKeyboardActionRedux(event.keyCode);
 
     useEffect(() => {
