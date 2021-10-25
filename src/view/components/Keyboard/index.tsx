@@ -5,9 +5,9 @@ import { useBacklitKeyboardRedux } from '../../../bus/client/backlitKeyboard';
 // Bus
 import { useInputMessageRedux } from '../../../bus/client/inputMessageKey';
 import { useTogglersRedux } from '../../../bus/client/togglers';
-import { GetKeys } from '../../../tools/utils/getKeys';
 
 // Utils
+import { GetKeys } from '../../../tools/utils';
 import { keysData, keysDataArray } from '../../../tools/utils/keysData';
 
 // Elements
