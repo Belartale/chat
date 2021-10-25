@@ -43,9 +43,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton, isIdChangeMessage,
         deleteBacklitKeyboardActionRedux,
     } = useBacklitKeyboardRedux();
 
-    const setBacklitKeyboard = (event: KeyboardEvent) => {
-        backlitKeyboardsRedux.includes(event.keyCode) ? setBacklitKeyboardActionRedux(event.keyCode) : null;
-    };
+    const setBacklitKeyboard = (event: KeyboardEvent) => setBacklitKeyboardActionRedux(event.keyCode);
     const deleteBacklitKeyboard = (event: KeyboardEvent) => deleteBacklitKeyboardActionRedux(event.keyCode);
 
     useEffect(() => {
