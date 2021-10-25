@@ -45,6 +45,7 @@ export const Keyboard: FC<KeyboardTypes> = ({ onSubmitButton, isIdChangeMessage,
     } = useBacklitKeyboardRedux();
 
     const setBacklitKeyboard = (event: KeyboardEvent) => {
+        console.log(event.keyCode);
         let result = GetKeys.get();
 
         if (result !== null && !result.includes(event.keyCode)) {
