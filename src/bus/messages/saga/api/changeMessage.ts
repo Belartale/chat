@@ -10,7 +10,7 @@ export const changeMessage: ChangeMessageContract = async ({ _id, text }) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(text),
+        body: JSON.stringify({ text }),
     });
 
     if (response.status !== 200) {
