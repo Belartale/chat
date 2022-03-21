@@ -132,7 +132,7 @@ export const Chat: FC = () => {
                                 </MessageBody>
                             </Message>
                         );
-                    }).reverse()
+                    })
                     }
                 </WindowChat>
                 <form onSubmit = { (event) => event.preventDefault() }>
