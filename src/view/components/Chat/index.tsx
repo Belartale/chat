@@ -161,7 +161,8 @@ export const Chat: FC = () => {
                             onClick = { () => setTogglerListenerAction({ type: 'isKeyboard' }) }>
                             Keyboard
                         </Button>
-                        {togglersRedux.isKeyboard
+                    </ContainerCenter>
+                    {togglersRedux.isKeyboard
                         ? (
                             <Keyboard
                                 isIdChangeMessage = { isIdChangeMessage }
@@ -170,7 +171,6 @@ export const Chat: FC = () => {
                                 onSubmitButton = { onSubmitButton }
                             />
                         ) : null}
-                    </ContainerCenter>
                 </form>
             </ContainerStyled>
         </Card>
