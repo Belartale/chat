@@ -1,0 +1,40 @@
+{
+  "icons": [
+    {
+      "src": "/icon_512x512.d6730a1b959af056032402e52f352e78.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_384x384.c6e3190ba43e16701093a0264c04b135.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_256x256.6b0d5d8956bcf5e0d04229d3e36438be.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_192x192.7344a4280929de741cb931d38e09cad4.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_128x128.96748c6d1030835ee340a111876da212.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_96x96.5ba381ad64237d49eb4dcdc1fc8be489.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "EXAMPLE",
+  "short_name": "EXAMPLE",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "background_color": "#ffffff"
+}
