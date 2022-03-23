@@ -163,16 +163,16 @@ export const Chat: FC = () => {
                         </Button>
 
                     </ContainerCenter>
+                    {togglersRedux.isKeyboard
+                        ? (
+                            <Keyboard
+                                isIdChangeMessage = { isIdChangeMessage }
+                                isValidation = { isValidation }
+                                onChangeButton = { onChangeButton }
+                                onSubmitButton = { onSubmitButton }
+                            />
+                        ) : null}
                 </form>
-                {togglersRedux.isKeyboard
-                    ? (
-                        <Keyboard
-                            isIdChangeMessage = { isIdChangeMessage }
-                            isValidation = { isValidation }
-                            onChangeButton = { onChangeButton }
-                            onSubmitButton = { onSubmitButton }
-                        />
-                    ) : null}
             </ContainerStyled>
         </Card>
     );
