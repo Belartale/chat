@@ -15,8 +15,6 @@ It is my pet project. You can communicate with other users, write message, edit,
 
 ---README IN DEV---
 
-Welcome to Arziburst Boilerplate project.
-
 Project required technologies:
 - NPM ^6v
 - Node ^14v
@@ -70,6 +68,6 @@ Best comments names:
 
 Environment setup:
 
-Create `.development.env` and `.production.env` by example from `.env.example`.
+Create `.env.development` and `.env.production` by example from `.env.example`.
 
 npm run [start|build|analyze|serve]
