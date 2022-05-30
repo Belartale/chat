@@ -58,11 +58,3 @@ Environment setup:
 Create `.development.env` and `.production.env` by example from `.env.example`.
 
 npm run [start|build|analyze|serve]
-
-
-IControlledError это не нужно, это альфа!!!
-
-Почитать о import { v4 } from 'uuid';
-({ username: `RAT:${v4().slice(0, 5)}` })
-
-lodash
