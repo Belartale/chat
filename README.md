@@ -1,3 +1,13 @@
+# [Chat](https://belartale-chat.herokuapp.com/)
+
+It is my pet project. You can communicate with other users, write message, edit, delete and change, also it has an online keyboard, you can write, delete, edit, change and send message from this keyboard, also buttons of the keyboard can light up when you press on any button. I used stack: React, TypeScript, Style-components, Redux, Redux-saga and Redux-toolkit.
+
+## Preview:
+
+![img](https://user-images.githubusercontent.com/33392042/118311214-435d2900-b4f8-11eb-8fcc-b6a1d9f23c77.png)
+
+
+
 ---README IN DEV---
 
 Welcome to Arziburst Boilerplate project.
