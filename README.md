@@ -4,11 +4,13 @@ It is my pet project. You can communicate with other users, write message, edit,
 
 ## Preview main page:
 
-![Main-page](https://user-images.githubusercontent.com/33392042/171019900-aee84de9-4cb3-4559-ae91-919bf265b0ce.png)
+![Image-main-page](https://user-images.githubusercontent.com/33392042/171019900-aee84de9-4cb3-4559-ae91-919bf265b0ce.png)
 
 ## Preview Chat page:
-![Chat-page](https://user-images.githubusercontent.com/33392042/171020925-561c236d-f82c-4a67-ac12-8a0beecd013c.png)
+![Image-chat-page](https://user-images.githubusercontent.com/33392042/171020925-561c236d-f82c-4a67-ac12-8a0beecd013c.png)
 
+## Preview keyboard:
+![Image-keyboard](https://user-images.githubusercontent.com/33392042/171021451-41f5d3c1-5a8e-4419-b44c-b9cbac7bf673.png)
 
 
 
