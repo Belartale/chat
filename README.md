@@ -1,7 +1,8 @@
 # [Chat](https://belartale-chat.herokuapp.com/)
 
 It is my pet project. You can communicate with other users, write message, edit, delete and change, also it has an online keyboard, you can write, delete, edit, change and send message from this keyboard, also buttons of the keyboard can light up when you press on any button. 
-# I used stack: 
+
+### I used stack: 
 React, TypeScript, Style-components, Redux, Redux-saga and Redux-toolkit.
 
 ## Preview main page:
