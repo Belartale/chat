@@ -12,7 +12,7 @@ It is my pet project. You can communicate with other users, write message, edit,
 ## Preview keyboard:
 ![Image-keyboard](https://user-images.githubusercontent.com/33392042/171021451-41f5d3c1-5a8e-4419-b44c-b9cbac7bf673.png)
 
-
+## [Also I created server with Nest.js](https://github.com/Belartale/chat_backend)
 
 
 ---README IN DEV---
