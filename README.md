@@ -4,7 +4,8 @@ It is my pet project. You can communicate with other users, write message, edit,
 
 ## Preview:
 
-![img](https://user-images.githubusercontent.com/33392042/118311214-435d2900-b4f8-11eb-8fcc-b6a1d9f23c77.png)
+![Main-page](https://user-images.githubusercontent.com/33392042/171019529-ffc7cd84-776f-4960-8eb7-f681234eb906.png)
+
 
 
 
