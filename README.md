@@ -2,9 +2,13 @@
 
 It is my pet project. You can communicate with other users, write message, edit, delete and change, also it has an online keyboard, you can write, delete, edit, change and send message from this keyboard, also buttons of the keyboard can light up when you press on any button. I used stack: React, TypeScript, Style-components, Redux, Redux-saga and Redux-toolkit.
 
-## Preview:
+## Preview main page:
 
 ![Main-page](https://user-images.githubusercontent.com/33392042/171019900-aee84de9-4cb3-4559-ae91-919bf265b0ce.png)
+
+## Preview Chat page:
+![Chat-page](https://user-images.githubusercontent.com/33392042/171020925-561c236d-f82c-4a67-ac12-8a0beecd013c.png)
+
 
 
 
